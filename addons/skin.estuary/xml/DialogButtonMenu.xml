@@ -1,81 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<window>
+<window type="buttonMenu">
 	<defaultcontrol>9000</defaultcontrol>
-	<include>Animation_DialogPopupOpenClose</include>
 	<controls>
+		<include>BehindDialogFadeOut</include>
+		<!--all content-->
 		<control type="group">
-			<centerleft>50%</centerleft>
-			<width>600</width>
-			<centertop>50%</centertop>
-			<height>700</height>
-			<include content="DialogBackgroundCommons">
-				<param name="width" value="600" />
-				<param name="height" value="80" />
-				<param name="header_label" value="$LOCALIZE[31072]" />
-				<param name="header_id" value="2" />
-			</include>
-			<control type="panel" id="9000">
-				<include>ButtonMenuList</include>
-				<content>
-					<item>
-						<label>$LOCALIZE[13012]</label>
-						<onclick>Quit()</onclick>
-						<visible>System.ShowExitButton</visible>
-					</item>
-					<item>
-						<label>$LOCALIZE[13016]</label>
-						<onclick>Powerdown()</onclick>
+			<left>0r</left>
+			<width>405</width>
+			<include>SideBladeRight</include>
+			<!--close window button-->
+			<control type="button" id="20">
+				<left>35</left>
+				<top>0</top>
+				<width>50</width>
+				<height>25</height>
+				<label>-</label>
+				<font>-</font>
+				<onclick>PreviousMenu</onclick>
+				<texturefocus>DialogCloseButton-focus.png</texturefocus>
+				<texturenofocus>DialogCloseButton.png</texturenofocus>
+				<onleft>2</onleft>
+				<onright>13</onright>
+				<onup>13</onup>
+				<ondown>2</ondown>
+				<visible>system.getbool(input.enablemouse)</visible>
+			</control>
+			<control type="group">
+				<top>60</top>
+				<bottom>0</bottom>
+				<!--buttons grouplist-->
+				<control type="grouplist" id="9000">
+					<left>40</left>
+					<width>355</width>
+					<height>100%</height>
+					<onleft>9000</onleft>
+					<onright>9000</onright>
+					<onup>9000</onup>
+					<ondown>9000</ondown>
+					<itemgap>0</itemgap>
+					<align>left</align>
+					<control type="button" id="3">
+						<description>Shutdown button</description>
+						<include>ButtonCommonValues</include>
+						<onclick>XBMC.Powerdown()</onclick>
 						<visible>System.CanPowerDown</visible>
-					</item>
-					<item>
-						<label>$LOCALIZE[20150]</label>
-						<onclick>AlarmClock(shutdowntimer,Shutdown())</onclick>
-						<visible>!System.HasAlarm(shutdowntimer)</visible>
-						<visible>System.CanPowerDown | System.CanSuspend | System.CanHibernate</visible>
-					</item>
-					<item>
-						<label>$LOCALIZE[20151] $INFO[System.AlarmPos,(,)]</label>
-						<onclick>CancelAlarm(shutdowntimer)</onclick>
-						<visible>System.HasAlarm(shutdowntimer)</visible>
-					</item>
-					<item>
-						<label>$LOCALIZE[13011]</label>
-						<onclick>Suspend()</onclick>
-						<visible>System.CanSuspend</visible>
-					</item>
-					<item>
-						<label>$LOCALIZE[13010]</label>
-						<onclick>Hibernate()</onclick>
-						<visible>System.CanHibernate</visible>
-					</item>
-					<item>
-						<label>$LOCALIZE[13013]</label>
-						<onclick>Reset()</onclick>
+						<label>13016</label>
+						<align>center</align>
+					</control>
+
+					<control type="button" id="8">
+						<description>Reboot button</description>
+						<include>ButtonCommonValues</include>
+						<onclick>XBMC.Reset()</onclick>
 						<visible>System.CanReboot</visible>
-					</item>
-					<item>
-						<label>$LOCALIZE[20126] $INFO[system.profilename]</label>
-						<onclick>dialog.close(all,true)</onclick>
-						<onclick>System.LogOff</onclick>
-						<visible>System.HasLoginScreen | Integer.IsGreater(System.ProfileCount,1)</visible>
-						<visible>System.Loggedon</visible>
-					</item>
-					<item>
-						<label>$VAR[MasterModeLabel]</label>
-						<onclick>mastermode</onclick>
-						<visible>System.HasLocks</visible>
-					</item>
-					<item>
-						<label>$LOCALIZE[13017]</label>
-						<onclick>InhibitIdleShutdown(true)</onclick>
-						<visible>System.HasShutdown +!System.IsInhibit</visible>
-					</item>
-					<item>
-						<label>$LOCALIZE[13018]</label>
-						<onclick>InhibitIdleShutdown(false)</onclick>
-						<visible>System.HasShutdown + System.IsInhibit</visible>
-					</item>
-				</content>
+						<label>13013</label>
+						<align>center</align>
+					</control>
+				</control>
 			</control>
 		</control>
 	</controls>

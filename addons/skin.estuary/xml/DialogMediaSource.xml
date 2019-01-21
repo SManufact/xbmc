@@ -1,148 +1,264 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
 	<defaultcontrol>10</defaultcontrol>
-	<include>Animation_DialogPopupOpenClose</include>
 	<controls>
+		<!--all content-->
 		<control type="group">
-		<centertop>50%</centertop>
-		<height>750</height>
-		<centerleft>50%</centerleft>
-		<width>1200</width>
-		<include content="DialogBackgroundCommons">
-			<param name="width" value="1200" />
-			<param name="height" value="750" />
-			<param name="header_label" value="$LOCALIZE[13406]" />
-			<param name="header_id" value="2" />
-		</include>
-		<control type="label">
-			<description>path label</description>
-			<left>30</left>
-			<top>90</top>
-			<width>1140</width>
-			<height>30</height>
-			<align>center</align>
-			<aligny>center</aligny>
-			<font>font12</font>
-			<label>$LOCALIZE[1021]</label>
-		</control>
-		<control type="image">
-			<left>25</left>
-			<top>145</top>
-			<width>860</width>
-			<height>285</height>
-			<texture border="40">buttons/dialogbutton-nofo.png</texture>
-		</control>
-		<control type="list" id="10">
-			<left>45</left>
-			<top>165</top>
-			<width>820</width>
-			<height>245</height>
-			<onup>9001</onup>
-			<onleft>9000</onleft>
-			<onright>60</onright>
-			<ondown>12</ondown>
-			<pagecontrol>60</pagecontrol>
-			<scrolltime>200</scrolltime>
-			<itemlayout height="70" width="820">
-				<control type="label">
-					<left>10</left>
-					<right>10</right>
-					<top>0</top>
-					<bottom>0</bottom>
+			<centerleft>50%</centerleft>
+			<width>1210</width>
+			<visible>!Window.IsActive(FileBrowser)</visible>
+			<animation effect="slide" start="1925,0" end="0,0" time="400" tween="quadratic" easing="out">WindowOpen</animation>
+			<animation effect="slide" start="0,0" end="-1925,0" time="400" tween="quadratic" easing="out">WindowClose</animation>
+			<animation effect="slide" start="-1925,0" end="0,0" time="400" tween="quadratic" easing="out">Visible</animation>
+			<animation effect="slide" start="0,0" end="-1925,0" time="400" tween="quadratic" easing="out">Hidden</animation>
+			<animation effect="slide" start="0,0" end="-35,0" time="300" condition="Window.IsActive(ShutdownMenu) + !String.IsEqual(Skin.AspectRatio,21:9)">Conditional</animation>
+			<!--title bars and backgrounds-->
+			<include content="DynamicDialogBackground">
+				<param name="dialog-width" value="1210" />
+				<param name="glow-width" value="1290" />
+				<param name="subtitle-visible" value="true" />
+				<param name="subtitle-height" value="75" />
+				<param name="buttonbar-visible" value="true" />
+			</include>
+			<!--close window button-->
+			<control type="button">
+				<left>5</left>
+				<top>0</top>
+				<width>50</width>
+				<height>25</height>
+				<label>-</label>
+				<font>-</font>
+				<onclick>PreviousMenu</onclick>
+				<texturefocus>DialogCloseButton-focus.png</texturefocus>
+				<texturenofocus>DialogCloseButton.png</texturenofocus>
+				<onleft>9000</onleft>
+				<onright>9000</onright>
+				<onup>9000</onup>
+				<ondown>9000</ondown>
+				<visible>system.getbool(input.enablemouse)</visible>
+			</control>
+			<!--main content-->
+			<control type="group">
+				<!--title-->
+				<control type="label" id="2">
+					<left>45</left>
+					<top>25</top>
+					<width>1120</width>
+					<height>60</height>
+					<font>info.title</font>
+					<align>left</align>
 					<aligny>center</aligny>
-					<textcolor>grey</textcolor>
-					<label>$INFO[ListItem.Label]</label>
+					<textcolor>white</textcolor>
+					<label>$LOCALIZE[13406]</label>
 				</control>
-			</itemlayout>
-			<focusedlayout height="70" width="820">
+				<!--secondary title-->
+				<control type="label">
+					<left>45</left>
+					<top>115</top>
+					<width>1120</width>
+					<height>60</height>
+					<font>breadcrumb</font>
+					<align>left</align>
+					<aligny>center</aligny>
+					<textcolor>white</textcolor>
+					<label>1021</label>
+				</control>
+				<!--path list-->
+				<control type="list" id="10">
+					<left>45</left>
+					<top>210</top>
+					<bottom>520</bottom>
+					<width>788</width>
+					<pagecontrol>60</pagecontrol>
+					<scrolltime>200</scrolltime>
+					<onup>9001</onup>
+					<onleft>9000</onleft>
+					<onright>60</onright>
+					<ondown>12</ondown>
+					<itemlayout height="70">
+						<!--label-->
+						<control type="label">
+							<left>15</left>
+							<top>0</top>
+							<width>735</width>
+							<height>60</height>
+							<font>label</font>
+							<align>left</align>
+							<aligny>center</aligny>
+							<textcolor>text.primary</textcolor>
+							<selectedcolor>$VAR[Colour.500]</selectedcolor>
+							<info>ListItem.Label</info>
+						</control>
+					</itemlayout>
+					<focusedlayout height="70">
+						<!--background (no focus)-->
+						<control type="image">
+							<left>0</left>
+							<top>0</top>
+							<width>850</width>
+							<height>60</height>
+							<animation effect="fade" start="100" end="50" time="200" condition="!Control.HasFocus(10)">Conditional</animation>
+						</control>
+						<!--label-->
+						<control type="label">
+							<left>15</left>
+							<top>0</top>
+							<width>735</width>
+							<height>60</height>
+							<font>label</font>
+							<align>left</align>
+							<aligny>center</aligny>
+							<textcolor>white</textcolor>
+							<selectedcolor>$VAR[Colour.Alt]</selectedcolor>
+							<info>ListItem.Label</info>
+						</control>
+					</focusedlayout>
+				</control>
+				<!--scrollbar-->
+				<control type="scrollbar" id="60">
+					<left>843</left>
+					<top>210</top>
+					<bottom>530</bottom>
+					<orientation>vertical</orientation>
+					<showonepage>false</showonepage>
+					<onleft>10</onleft>
+					<onright>9000</onright>
+				</control>
+				<!--top buttons-->
+				<control type="grouplist" id="9000">
+					<left>873</left>
+					<top>210</top>
+					<width>320</width>
+					<height>220</height>
+					<onleft>60</onleft>
+					<onright>10</onright>
+					<onup>9001</onup>
+					<ondown>12</ondown>
+					<!--browse button-->
+					<include content="AnimatedCircleButtonGroup">
+						<param name="button-id" value="11" />
+						<param name="button-width" value="230" />
+						<param name="button-texture" value="browsebutton" />
+						<param name="button-label" value="1024" />
+						<param name="button-onup" value="9001" />
+						<param name="button-ondown" value="13" />
+						<param name="button-onleft" value="60" />
+						<param name="button-onright" value="10" />
+					</include>
+					<!--add button-->
+					<include content="AnimatedCircleButtonGroup">
+						<param name="button-id" value="13" />
+						<param name="button-width" value="130" />
+						<param name="button-texture" value="addbutton" />
+						<param name="button-label" value="15019" />
+						<param name="button-onup" value="11" />
+						<param name="button-ondown" value="14" />
+						<param name="button-onleft" value="60" />
+						<param name="button-onright" value="10" />
+					</include>
+					<!--remove button-->
+					<include content="AnimatedCircleButtonGroup">
+						<param name="button-id" value="14" />
+						<param name="button-width" value="150" />
+						<param name="button-texture" value="nobutton" />
+						<param name="button-label" value="1210" />
+						<param name="button-onup" value="13" />
+						<param name="button-ondown" value="12" />
+						<param name="button-onleft" value="60" />
+						<param name="button-onright" value="10" />
+					</include>
+				</control>
+				<!--title background-->
 				<control type="image">
 					<left>0</left>
-					<top>0</top>
-					<bottom>0</bottom>
-					<right>0</right>
-					<visible>Control.HasFocus(10)</visible>
-					<texture colordiffuse="button_focus">lists/focus.png</texture>
+					<top>500r</top>
+					<width>1210</width>
+					<height>75</height>
 				</control>
+				<!--title shadow-->
+				<control type="image">
+					<left>0</left>
+					<top>500r</top>
+					<width>1210</width>
+					<height>20</height>
+					<texture>homeshadow.png</texture>
+					<animation effect="fade" start="100" end="75" time="0" condition="true">Conditional</animation>
+				</control>
+				<!--sub title shadow-->
+				<control type="image">
+					<left>0</left>
+					<top>425r</top>
+					<width>1210</width>
+					<height>10</height>
+					<texture>homeshadow.png</texture>
+					<animation effect="fade" start="100" end="75" time="0" condition="true">Conditional</animation>
+				</control>
+				<!--name title-->
 				<control type="label">
-					<left>10</left>
-					<top>0</top>
-					<bottom>0</bottom>
-					<right>10</right>
+					<left>45</left>
+					<top>495r</top>
+					<width>1545</width>
+					<height>60</height>
+					<font>breadcrumb</font>
+					<align>left</align>
 					<aligny>center</aligny>
-					<label>$INFO[ListItem.Label]</label>
+					<textcolor>white</textcolor>
+					<label>1022</label>
 				</control>
-			</focusedlayout>
-		</control>
-		<control type="scrollbar" id="60">
-			<left>870</left>
-			<top>166</top>
-			<width>12</width>
-			<height>243</height>
-			<onleft>10</onleft>
-			<onright>9000</onright>
-			<orientation>vertical</orientation>
-		</control>
-		<control type="grouplist" id="9000">
-			<left>880</left>
-			<top>147</top>
-			<orientation>vertical</orientation>
-			<onleft>10</onleft>
-			<onright>10</onright>
-			<ondown>12</ondown>
-			<itemgap>-7</itemgap>
-			<include content="DefaultDialogButton">
-				<param name="id" value="11" />
-				<param name="label" value="$LOCALIZE[1024]" />
-			</include>
-			<include content="DefaultDialogButton">
-				<param name="id" value="13" />
-				<param name="label" value="$LOCALIZE[15019]" />
-			</include>
-			<include content="DefaultDialogButton">
-				<param name="id" value="14" />
-				<param name="label" value="$LOCALIZE[1210]" />
-			</include>
-		</control>
-		<control type="label">
-			<description>Name label</description>
-			<left>30</left>
-			<top>460</top>
-			<width>1140</width>
-			<height>30</height>
-			<align>center</align>
-			<aligny>center</aligny>
-			<font>font12</font>
-			<label>$LOCALIZE[1022]</label>
-		</control>
-		<control type="edit" id="12">
-			<description>Name Button</description>
-			<left>30</left>
-			<top>500</top>
-			<width>1140</width>
-			<height>90</height>
-			<align>center</align>
-			<aligny>center</aligny>
-			<label></label>
-			<onup>10</onup>
-			<ondown>9001</ondown>
-		</control>
-		<control type="grouplist" id="9001">
-			<left>0</left>
-			<bottom>40</bottom>
-			<height>100</height>
-			<width>1200</width>
-			<align>center</align>
-			<orientation>horizontal</orientation>
-			<onup>12</onup>
-			<include content="DefaultDialogButton">
-				<param name="id" value="18" />
-				<param name="label" value="$LOCALIZE[186]" />
-			</include>
-			<include content="DefaultDialogButton">
-				<param name="id" value="19" />
-				<param name="label" value="$LOCALIZE[222]" />
-			</include>
-		</control>
+				<!--name button-->
+				<control type="edit" id="12">
+					<left>45</left>
+					<top>395r</top>
+					<width>1110</width>
+					<height>60</height>
+					<align>left</align>
+					<aligny>center</aligny>
+					<label>-</label>
+					<font>label</font>
+					<textcolor>text.primary</textcolor>
+					<focusedcolor>white</focusedcolor>
+					<texturenofocus colordiffuse="button.border">button-border-1110.png</texturenofocus>
+					<onup>10</onup>
+					<onleft>12</onleft>
+					<onright>19</onright>
+					<ondown>9001</ondown>
+				</control>
+				<!--bottom buttons-->
+				<control type="grouplist" id="9001">
+					<centerleft>50%</centerleft>
+					<top>65r</top>
+					<width>750</width>
+					<height>60</height>
+					<align>justify</align>
+					<orientation>horizontal</orientation>
+					<onleft>9001</onleft>
+					<onright>9001</onright>
+					<onup>12</onup>
+					<ondown>10</ondown>
+					<!--ok button-->
+					<include content="AnimatedCircleButtonGroup">
+						<param name="button-id" value="18" />
+						<param name="button-width" value="130" />
+						<param name="button-texture" value="yesbutton" />
+						<param name="button-label" value="186" />
+						<param name="button-onup" value="12" />
+						<param name="button-ondown" value="10" />
+						<param name="button-onleft" value="19" />
+						<param name="button-onright" value="19" />
+					</include>
+					<!--cancel button-->
+					<include content="AnimatedCircleButtonGroup">
+						<param name="button-id" value="19" />
+						<param name="button-width" value="160" />
+						<param name="button-texture" value="nobutton" />
+						<param name="button-label" value="222" />
+						<param name="button-onup" value="12" />
+						<param name="button-ondown" value="10" />
+						<param name="button-onleft" value="18" />
+						<param name="button-onright" value="18" />
+					</include>
+				</control>
+			</control>
 		</control>
 	</controls>
 </window>

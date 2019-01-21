@@ -1,303 +1,338 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <window>
-	<onload condition="!Player.PauseEnabled">SetFocus(603)</onload>
 	<defaultcontrol always="true">602</defaultcontrol>
-	<include>Animation_BottomSlide</include>
-	<depth>DepthOSD</depth>
 	<controls>
-		<control type="button">
-			<description>background close area</description>
-			<left>0</left>
-			<top>0</top>
-			<width>100%</width>
-			<bottom>180</bottom>
-			<texturefocus />
-			<texturenofocus />
-			<onclick>Action(close)</onclick>
-		</control>
-		<control type="group" id="200">
-			<bottom>0</bottom>
-			<height>120</height>
-			<visible>!Window.IsActive(osdaudiosettings) + !Window.IsActive(osdvideosettings) + !Window.IsActive(playerprocessinfo)</visible>
-			<animation type="Visible" reversible="false">
-				<effect type="fade" start="0" end="100" time="300"/>
-				<effect type="slide" start="0,200" end="0,0" time="300" tween="cubic" easing="out" />
-			</animation>
-			<animation type="Hidden" reversible="false">
-				<effect type="fade" start="100" end="0" time="300"/>
-				<effect type="slide" start="0,0" end="0,200" time="300" tween="cubic" easing="out" />
-			</animation>
-			<control type="grouplist" id="201">
-				<left>20</left>
-				<top>30</top>
-				<width>100%</width>
-				<height>135</height>
-				<itemgap>20</itemgap>
-				<scrolltime tween="sine">200</scrolltime>
-				<orientation>horizontal</orientation>
-				<onup>87</onup>
-				<ondown>noop</ondown>
-				<onleft>5000</onleft>
-				<onright>62040</onright>
-				<control type="radiobutton" id="600">
-					<include content="OSDButton">
-						<param name="texture" value="osd/fullscreen/buttons/previous.png"/>
-					</include>
-					<onclick>PlayerControl(Previous)</onclick>
-					<visible>MusicPlayer.HasPrevious | Player.SeekEnabled</visible>
-				</control>
-				<control type="radiobutton" id="602">
-					<textureradioonfocus colordiffuse="white">osd/fullscreen/buttons/play.png</textureradioonfocus>
-					<textureradioonnofocus>osd/fullscreen/buttons/play.png</textureradioonnofocus>
-					<textureradioofffocus colordiffuse="white">osd/fullscreen/buttons/pause.png</textureradioofffocus>
-					<textureradiooffnofocus>osd/fullscreen/buttons/pause.png</textureradiooffnofocus>
-					<texturefocus colordiffuse="button_focus">osd/fullscreen/buttons/button-fo.png</texturefocus>
-					<width>76</width>
-					<animation center="38,38" effect="zoom" end="100" reversible="false" start="95" time="480" tween="back">Focus</animation>
-					<height>76</height>
-					<radiowidth>74</radiowidth>
-					<radioheight>74</radioheight>
-					<font></font>
-					<texturenofocus />
-					<radioposx>1</radioposx>
-					<radioposy>0</radioposy>
-					<selected>Player.Paused</selected>
-					<onclick>PlayerControl(Play)</onclick>
-					<visible>Player.PauseEnabled</visible>
-				</control>
-				<control type="radiobutton" id="603">
-					<include content="OSDButton">
-						<param name="texture" value="osd/fullscreen/buttons/stop.png"/>
-					</include>
-					<onclick>PlayerControl(Stop)</onclick>
-				</control>
-				<control type="radiobutton" id="605">
-					<include content="OSDButton">
-						<param name="texture" value="osd/fullscreen/buttons/next.png"/>
-					</include>
-					<onclick>PlayerControl(Next)</onclick>
-					<visible>MusicPlayer.HasNext | [MusicPlayer.Content(LiveTV) + Player.SeekEnabled]</visible>
-				</control>
-				<control type="radiobutton" id="606">
-					<textureradioonfocus colordiffuse="white">osd/fullscreen/buttons/record-white.png</textureradioonfocus>
-					<textureradioonnofocus>osd/fullscreen/buttons/record-white.png</textureradioonnofocus>
-					<textureradioofffocus colordiffuse="white">osd/fullscreen/buttons/record.png</textureradioofffocus>
-					<textureradiooffnofocus>osd/fullscreen/buttons/record.png</textureradiooffnofocus>
-					<texturefocus colordiffuse="button_focus">osd/fullscreen/buttons/button-fo.png</texturefocus>
-					<width>76</width>
-					<animation center="38,38" effect="zoom" end="100" reversible="false" start="95" time="480" tween="back">Focus</animation>
-					<height>76</height>
-					<radiowidth>74</radiowidth>
-					<radioheight>74</radioheight>
-					<font></font>
-					<texturenofocus />
-					<radioposx>1</radioposx>
-					<radioposy>0</radioposy>
-					<selected>!PVR.IsRecordingPlayingChannel</selected>
-					<onclick>PVR.ToggleRecordPlayingChannel</onclick>
-					<visible>PVR.CanRecordPlayingChannel</visible>
-					<visible>MusicPlayer.Content(livetv)</visible>
-				</control>
+		<!--all content-->
+		<control type="group">
+			<centerleft>50%</centerleft>
+			<top>105r</top>
+			<width>1140</width>
+			<!--background-->
+			<control type="image" id="1">
+				<width>1140</width>
+				<height>85</height>
+				<texture colordiffuse="tertiary">backgrounds/osd bg.png</texture>
+				<visible>![Window.IsVisible(AddonSettings) | Window.IsVisible(SelectDialog) | Window.IsVisible(VisualisationPresetList) | Window.IsVisible(PVROSDChannels) | Window.IsVisible(PVROSDGuide) | Window.IsVisible(PVRRadioRDSInfo) | Window.IsVisible(OSDAudioDSPSettings) | Window.IsVisible(Addon)]</visible>
 			</control>
-			<control type="grouplist" id="202">
-				<right>20</right>
-				<top>30</top>
-				<width>1850</width>
-				<height>135</height>
-				<align>right</align>
-				<itemgap>20</itemgap>
-				<scrolltime tween="sine">200</scrolltime>
+			<control type="slider" id="87">
+				<description>Seek Slider</description>
+				<left>25</left>
+				<top>-50</top>
+				<width>1090</width>
+				<height>7</height>
+				<onup>702</onup>
+				<ondown>26</ondown>
+				<action>seek</action>
+				<animation effect="fade" time="200">VisibleChange</animation>
+				<visible>![Window.IsVisible(AddonSettings) | Window.IsVisible(SelectDialog) | Window.IsVisible(VisualisationPresetList) | Window.IsVisible(PVROSDChannels) | Window.IsVisible(PVROSDGuide) | Window.IsVisible(PVRRadioRDSInfo) | Window.IsVisible(OSDAudioDSPSettings) | Window.IsVisible(Addon)]</visible>
+			</control>
+			<control type="grouplist" id="100">
+				<left>30</left>
+				<top>23</top>
+				<onup>1000</onup>
+				<ondown>1000</ondown>
+				<onleft>704</onleft>
+				<onright>705</onright>
 				<orientation>horizontal</orientation>
-				<onup>87</onup>
-				<ondown>noop</ondown>
-				<onleft>606</onleft>
-				<onright>600</onright>
-				<control type="radiobutton" id="62040">
-					<include content="OSDButton">
-						<param name="texture" value="osd/fullscreen/buttons/information.png"/>
-					</include>
-					<onclick>Info</onclick>
+				<itemgap>25</itemgap>
+				<animation effect="fade" time="200">VisibleChange</animation>
+				<visible>![Window.IsVisible(AddonSettings) | Window.IsVisible(SelectDialog) | Window.IsVisible(VisualisationPresetList) | Window.IsVisible(PVROSDChannels) | Window.IsVisible(PVROSDGuide) | Window.IsVisible(PVRRadioRDSInfo) | Window.IsVisible(OSDAudioDSPSettings) | Window.IsVisible(Addon)]</visible>
+				<control type="button" id="300">
+					<width>40</width>
+					<height>40</height>
+					<label>210</label>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDChannelUPNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDChannelUPNF.png</texturenofocus>
+					<onclick>PlayerControl(Previous)</onclick>
 					<visible>MusicPlayer.Content(LiveTV)</visible>
 				</control>
-				<control type="radiobutton" id="62041">
-					<include content="OSDButton">
-						<param name="texture" value="osd/fullscreen/buttons/channels.png"/>
-					</include>
-					<onclick>Dialog.Close(MusicOSD)</onclick>
+				<control type="button" id="301">
+					<width>40</width>
+					<height>40</height>
+					<label>31354</label>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDChannelDownNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDChannelDownNF.png</texturenofocus>
+					<onclick>PlayerControl(Next)</onclick>
+					<visible>MusicPlayer.Content(LiveTV)</visible>
+				</control>
+				<control type="button" id="600">
+					<width>40</width>
+					<height>40</height>
+					<label>210</label>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDPrevTrackNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDPrevTrackNF.png</texturenofocus>
+					<onclick>PlayerControl(Previous)</onclick>
+					<visible>!MusicPlayer.Content(LiveTV)</visible>
+				</control>
+				<control type="button" id="601">
+					<width>40</width>
+					<height>40</height>
+					<label>31354</label>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDRewindNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDRewindNF.png</texturenofocus>
+					<onclick>PlayerControl(Rewind)</onclick>
+				</control>
+				<control type="togglebutton" id="602">
+					<width>40</width>
+					<height>40</height>
+					<label>31351</label>
+					<altlabel>208</altlabel>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDPauseNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDPauseNF.png</texturenofocus>
+					<usealttexture>Player.Paused | Player.Forwarding | Player.Rewinding</usealttexture>
+					<alttexturefocus colordiffuse="$VAR[Colour.500]">OSDPlayNF.png</alttexturefocus>
+					<alttexturenofocus colordiffuse="text.primary">OSDPlayNF.png</alttexturenofocus>
+					<onclick>PlayerControl(Play)</onclick>
+				</control>
+				<control type="button" id="603">
+					<width>40</width>
+					<height>40</height>
+					<label>31352</label>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDStopNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDStopNF.png</texturenofocus>
+					<onclick>PlayerControl(Stop)</onclick>
+				</control>
+				<control type="button" id="604">
+					<width>40</width>
+					<height>40</height>
+					<label>31353</label>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDForwardNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDForwardNF.png</texturenofocus>
+					<onclick>PlayerControl(Forward)</onclick>
+				</control>
+				<control type="button" id="605">
+					<width>40</width>
+					<height>40</height>
+					<label>209</label>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDNextTrackNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDNextTrackNF.png</texturenofocus>
+					<onclick>PlayerControl(Next)</onclick>
+					<visible>!MusicPlayer.Content(LiveTV)</visible>
+				</control>
+				<control type="button" id="306">
+					<width>40</width>
+					<height>40</height>
+					<label>19019</label>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDChannelListNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDChannelListNF.png</texturenofocus>
 					<onclick>ActivateWindow(PVROSDChannels)</onclick>
 					<visible>MusicPlayer.Content(LiveTV)</visible>
 				</control>
-				<control type="radiobutton" id="62042">
-					<include content="OSDButton">
-						<param name="texture" value="osd/fullscreen/buttons/guide.png"/>
-					</include>
-					<onclick>Dialog.Close(MusicOSD)</onclick>
-					<onclick>ActivateWindow(PVRChannelGuide)</onclick>
-					<visible>MusicPlayer.Content(LiveTV) + VideoPlayer.HasEPG</visible>
+				<control type="button" id="307">
+					<width>40</width>
+					<height>40</height>
+					<label>$LOCALIZE[19029]$INFO[MusicPlayer.ChannelName, - ]</label>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDepgNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDepgNF.png</texturenofocus>
+					<onclick>ActivateWindow(PVROSDGuide)</onclick>
+					<visible>MusicPlayer.Content(LiveTV) + !RDS.HasRadiotextPlus</visible>
 				</control>
-				<control type="radiobutton" id="62043">
-					<include content="OSDButton">
-						<param name="texture" value="osd/fullscreen/buttons/rds.png"/>
-					</include>
-					<onclick>Dialog.Close(MusicOSD)</onclick>
+				<control type="button" id="308">
+					<width>40</width>
+					<height>40</height>
+					<label>209</label>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDRadioRDSNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDRadioRDSNF.png</texturenofocus>
 					<onclick>ActivateWindow(PVRRadioRDSInfo)</onclick>
-					<visible>MusicPlayer.Content(LiveTV) + RDS.HasRadiotext</visible>
+					<visible>MusicPlayer.Content(LiveTV) + RDS.HasRadiotextPlus</visible>
 				</control>
-				<control type="radiobutton" id="620">
-					<include content="OSDButton">
-						<param name="texture" value="osd/fullscreen/buttons/rating.png"/>
-					</include>
-					<onclick>SetRating</onclick>
-				</control>
-				<control type="group" id="699">
-					<width>76</width>
-					<height>76</height>
-					<visible>![MusicPlayer.Content(LiveTV) | MusicPartyMode.Enabled]</visible>
-					<control type="button" id="704">
+				<control type="group" id="698">
+					<width>50</width>
+					<height>50</height>
+					<visible>!MusicPlayer.Content(LiveTV)</visible>
+					<control type="button" id="606">
 						<left>0</left>
-						<top>0</top>
-						<width>74</width>
-						<height>74</height>
-						<label></label>
-						<font></font>
-						<texturefocus colordiffuse="button_focus">osd/fullscreen/buttons/button-fo.png</texturefocus>
-						<texturenofocus />
-						<onleft>620</onleft>
+						<top>-5</top>
+						<width>50</width>
+						<height>50</height>
+						<label>$LOCALIZE[486]$INFO[Playlist.Repeat, : ]</label>
+						<font>-</font>
+						<texturefocus>-</texturefocus>
+						<texturenofocus>-</texturenofocus>
+						<onclick>XBMC.PlayerControl(Repeat)</onclick>
+						<onleft>605</onleft>
 						<onright>607</onright>
-						<onup>87</onup>
-						<ondown>noop</ondown>
-						<onclick>PlayerControl(Repeat)</onclick>
+						<onup>1000</onup>
+						<ondown>1000</ondown>
 					</control>
 					<control type="image">
 						<left>0</left>
-						<top>0</top>
-						<width>74</width>
-						<height>74</height>
-						<animation center="38,38" effect="zoom" end="100" reversible="false" start="95" time="480" tween="back" condition="Control.HasFocus(704)">Conditional</animation>
-						<texture colordiffuse="white">$VAR[PlayerControlsRepeatImageVar]</texture>
+						<top>-5</top>
+						<width>50</width>
+						<height>50</height>
+						<texture colordiffuse="text.primary">OSDRepeatNF.png</texture>
+						<visible>!Playlist.IsRepeat + !Playlist.IsRepeatOne</visible>
+						<visible>!Control.HasFocus(606)</visible>
+					</control>
+					<control type="image">
+						<left>0</left>
+						<top>-5</top>
+						<width>50</width>
+						<height>50</height>
+						<texture colordiffuse="$VAR[Colour.500]">OSDRepeatNF.png</texture>
+						<visible>!Playlist.IsRepeat + !Playlist.IsRepeatOne</visible>
+						<visible>Control.HasFocus(606)</visible>
+					</control>
+					<control type="image">
+						<left>0</left>
+						<top>-5</top>
+						<width>50</width>
+						<height>50</height>
+						<texture colordiffuse="text.primary">OSDRepeatOneNF.png</texture>
+						<visible>Playlist.IsRepeatOne</visible>
+						<visible>!Control.HasFocus(606)</visible>
+					</control>
+					<control type="image">
+						<left>0</left>
+						<top>-5</top>
+						<width>50</width>
+						<height>50</height>
+						<texture colordiffuse="$VAR[Colour.500]">OSDRepeatOneNF.png</texture>
+						<visible>Playlist.IsRepeatOne</visible>
+						<visible>Control.HasFocus(606)</visible>
+					</control>
+					<control type="image">
+						<left>0</left>
+						<top>-5</top>
+						<width>50</width>
+						<height>50</height>
+						<texture colordiffuse="text.primary">OSDRepeatAllNF.png</texture>
+						<visible>Playlist.IsRepeat</visible>
+						<visible>!Control.HasFocus(606)</visible>
+					</control>
+					<control type="image">
+						<left>0</left>
+						<top>-5</top>
+						<width>50</width>
+						<height>50</height>
+						<texture colordiffuse="$VAR[Colour.500]">OSDRepeatAllNF.png</texture>
+						<visible>Playlist.IsRepeat</visible>
+						<visible>Control.HasFocus(606)</visible>
 					</control>
 				</control>
-				<control type="radiobutton" id="607">
-					<textureradioonfocus colordiffuse="white">osd/fullscreen/buttons/random-on.png</textureradioonfocus>
-					<textureradioonnofocus>osd/fullscreen/buttons/random-on.png</textureradioonnofocus>
-					<textureradioofffocus colordiffuse="white">osd/fullscreen/buttons/random-off.png</textureradioofffocus>
-					<textureradiooffnofocus>osd/fullscreen/buttons/random-off.png</textureradiooffnofocus>
-					<textureradioondisabled colordiffuse="disabled">osd/fullscreen/buttons/random-on.png</textureradioondisabled>
-					<textureradiooffdisabled colordiffuse="disabled">osd/fullscreen/buttons/random-off.png</textureradiooffdisabled>
-					<texturefocus colordiffuse="button_focus">osd/fullscreen/buttons/button-fo.png</texturefocus>
-					<width>76</width>
-					<animation center="38,38" effect="zoom" end="100" reversible="false" start="95" time="480" tween="back">Focus</animation>
-					<height>76</height>
-					<radiowidth>74</radiowidth>
-					<radioheight>74</radioheight>
-					<font></font>
-					<texturenofocus />
-					<radioposx>1</radioposx>
-					<radioposy>0</radioposy>
-					<selected>Playlist.IsRandom</selected>
-					<visible>![MusicPlayer.Content(LiveTV) | MusicPartyMode.Enabled]</visible>
-					<onclick>PlayerControl(Random)</onclick>
-				</control>
-				<control type="radiobutton" id="703">
-					<include content="OSDButton">
-						<param name="texture" value="osd/fullscreen/buttons/settings-subtitle.png"/>
-					</include>
-					<onclick>Close</onclick>
-					<onclick condition="!String.IsEmpty(Skin.String(LyricScript_Path))">RunScript($INFO[Skin.String(LyricScript_Path)])</onclick>
-					<onclick condition="String.IsEmpty(Skin.String(LyricScript_Path))">Skin.SetAddon(LyricScript_Path,xbmc.python.lyrics)</onclick>
-					<onclick condition="String.IsEmpty(Skin.String(LyricScript_Path))">Close</onclick>
-					<onclick condition="String.IsEmpty(Skin.String(LyricScript_Path))">RunScript($INFO[Skin.String(LyricScript_Path)])</onclick>
-				</control>
-				<control type="radiobutton" id="5000">
-					<include content="OSDButton">
-						<param name="texture" value="osd/fullscreen/buttons/settings.png"/>
-					</include>
-					<onclick>ActivateWindow(1105)</onclick>
+				<control type="group" id="699">
+					<width>50</width>
+					<height>50</height>
+					<visible>!MusicPlayer.Content(LiveTV)</visible>
+					<control type="togglebutton" id="607">
+						<left>0</left>
+						<top>-5</top>
+						<width>50</width>
+						<height>50</height>
+						<label>$LOCALIZE[590]$INFO[Playlist.Random, : ]</label>
+						<font>-</font>
+						<texturefocus colordiffuse="$VAR[Colour.500]">OSDRandomOffNF.png</texturefocus>
+						<texturenofocus colordiffuse="text.primary">OSDRandomOffNF.png</texturenofocus>
+						<usealttexture>Playlist.IsRandom</usealttexture>
+						<alttexturefocus colordiffuse="$VAR[Colour.500]">OSDRandomOnNF.png</alttexturefocus>
+						<alttexturenofocus colordiffuse="text.primary">OSDRandomOnNF.png</alttexturenofocus>
+						<onclick>XBMC.PlayerControl(Random)</onclick>
+						<visible>!MusicPlayer.Content(LiveTV)</visible>
+						<onleft>606</onleft>
+						<onright>705</onright>
+						<onup>1000</onup>
+						<ondown>1000</ondown>
+					</control>
 				</control>
 			</control>
-			<control type="label">
-				<animation effect="slide" end="0,-20" time="150" condition="MusicPlayer.Content(LiveTV)">conditional</animation>
-				<right>20</right>
-				<top>-60</top>
-				<aligny>center</aligny>
+			<control type="grouplist" id="101">
+				<right>30</right>
+				<top>23</top>
+				<onup>1000</onup>
+				<ondown>1000</ondown>
+				<onleft>607</onleft>
+				<onright>300</onright>
 				<align>right</align>
-				<width>1000</width>
-				<height>50</height>
-				<label>$VAR[MusicOSDHelpTextVar]</label>
-				<visible>!Player.ShowInfo</visible>
-			</control>
-		</control>
-		<control type="group">
-			<bottom>0</bottom>
-			<height>120</height>
-			<animation effect="fade" start="0" end="100" time="250">WindowOpen</animation>
-			<animation effect="fade" start="100" end="0" time="250">WindowClose</animation>
-			<control type="button" id="87">
-				<include>HiddenObject</include>
-				<onup condition="Player.Forwarding | Player.Rewinding">PlayerControl(Play)</onup>
-				<onup>201</onup>
-				<ondown condition="Player.Forwarding | Player.Rewinding">PlayerControl(Play)</ondown>
-				<ondown>200</ondown>
-				<onright condition="!Player.Forwarding32x">PlayerControl(Forward)</onright>
-				<onleft condition="!Player.Rewinding32x">PlayerControl(Rewind)</onleft>
-				<visible>Player.SeekEnabled</visible>
-				<onclick condition="Player.Forwarding | Player.Rewinding">PlayerControl(Play)</onclick>
-			</control>
-			<control type="slider">
-				<left>0</left>
-				<top>-5</top>
-				<width>100%</width>
-				<height>26</height>
-				<onup>8010</onup>
-				<ondown>650</ondown>
-				<texturesliderbar colordiffuse="00FFFFFF">osd/progress/nub_leftright.png</texturesliderbar>
-				<textureslidernib>osd/progress/nub_leftright.png</textureslidernib>
-				<textureslidernibfocus colordiffuse="button_focus">osd/progress/nub_leftright.png</textureslidernibfocus>
-				<info>Player.Progress</info>
-				<visible>Player.SeekEnabled + !Control.HasFocus(87) + !MusicPlayer.Content(LiveTV)</visible>
-				<action>seek</action>
-			</control>
-			<control type="slider">
-				<left>0</left>
-				<top>-5</top>
-				<width>100%</width>
-				<height>26</height>
-				<onup>8010</onup>
-				<ondown>650</ondown>
-				<texturesliderbar colordiffuse="00FFFFFF">osd/progress/nub_leftright.png</texturesliderbar>
-				<textureslidernib colordiffuse="button_focus">osd/progress/nub_leftright.png</textureslidernib>
-				<textureslidernibfocus colordiffuse="button_focus">osd/progress/nub_leftright.png</textureslidernibfocus>
-				<info>Player.Progress</info>
-				<visible>Player.SeekEnabled + Control.HasFocus(87) + !MusicPlayer.Content(LiveTV)</visible>
-				<action>seek</action>
-			</control>
-			<control type="slider">
-				<left>0</left>
-				<top>-5</top>
-				<width>100%</width>
-				<height>26</height>
-				<onup>8010</onup>
-				<ondown>650</ondown>
-				<texturesliderbar colordiffuse="00FFFFFF">osd/progress/nub_leftright.png</texturesliderbar>
-				<textureslidernib>osd/progress/nub_leftright.png</textureslidernib>
-				<textureslidernibfocus colordiffuse="button_focus">osd/progress/nub_leftright.png</textureslidernibfocus>
-				<info>PVR.TimeshiftProgressPlayPos</info>
-				<action>pvr.seek</action>
-				<visible>Player.SeekEnabled + !Control.HasFocus(87) + MusicPlayer.Content(LiveTV)</visible>
-			</control>
-			<control type="slider">
-				<left>0</left>
-				<top>-5</top>
-				<width>100%</width>
-				<height>26</height>
-				<onup>8010</onup>
-				<ondown>650</ondown>
-				<texturesliderbar colordiffuse="00FFFFFF">osd/progress/nub_leftright.png</texturesliderbar>
-				<textureslidernib colordiffuse="button_focus">osd/progress/nub_leftright.png</textureslidernib>
-				<textureslidernibfocus colordiffuse="button_focus">osd/progress/nub_leftright.png</textureslidernibfocus>
-				<info>PVR.TimeshiftProgressPlayPos</info>
-				<action>pvr.seek</action>
-				<visible>Player.SeekEnabled + Control.HasFocus(87) + MusicPlayer.Content(LiveTV)</visible>
+				<orientation>horizontal</orientation>
+				<itemgap>25</itemgap>
+				<animation effect="fade" time="200">VisibleChange</animation>
+				<visible>![Window.IsVisible(AddonSettings) | Window.IsVisible(SelectDialog) | Window.IsVisible(VisualisationPresetList) | Window.IsVisible(PVROSDChannels) | Window.IsVisible(PVROSDGuide) | Window.IsVisible(PVRRadioRDSInfo) | Window.IsVisible(OSDAudioDSPSettings) | Window.IsVisible(Addon)]</visible>
+				<control type="button" id="705">
+					<width>40</width>
+					<height>40</height>
+					<label>15047</label>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDBookmarksNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDBookmarksNF.png</texturenofocus>
+					<onclick>setrating</onclick>
+				</control>
+				<control type="button" id="700">
+					<visible>system.getbool(audiooutput.dspaddonsenabled)</visible>
+					<width>40</width>
+					<height>40</height>
+					<label>15047</label>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDAudioNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDAudioNF.png</texturenofocus>
+					<onclick>ActivateWindow(OSDAudioDSPSettings)</onclick>
+				</control>
+				<control type="togglebutton" id="701">
+					<width>40</width>
+					<height>40</height>
+					<label>31128</label>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDLyricsNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDLyricsNF.png</texturenofocus>
+					<alttexturefocus colordiffuse="$VAR[Colour.500]">OSDLyricsNF.png</alttexturefocus>
+					<alttexturenofocus colordiffuse="text.primary">OSDLyricsNF.png</alttexturenofocus>
+					<onclick>Close</onclick>
+					<onclick>XBMC.RunScript($INFO[Skin.String(LyricScript_Path)])</onclick>
+					<altclick>Skin.SetAddon(LyricScript_Path,xbmc.python.lyrics)</altclick>
+					<altclick>Close</altclick>
+					<altclick>XBMC.RunScript($INFO[Skin.String(LyricScript_Path)])</altclick>
+					<usealttexture>String.IsEmpty(Skin.String(LyricScript_Path))</usealttexture>
+					<visible>!MusicPlayer.Content(LiveTV)</visible>
+				</control>
+				<control type="button" id="500">
+					<width>40</width>
+					<height>40</height>
+					<label>12006</label>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDVizNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDVizNF.png</texturenofocus>
+				</control>
+				<control type="button" id="702">
+					<width>40</width>
+					<height>40</height>
+					<label>$LOCALIZE[250] $LOCALIZE[21417]</label>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDPresetSettingsNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDPresetSettingsNF.png</texturenofocus>
+					<onclick>Addon.Default.OpenSettings(xbmc.player.musicviz)</onclick>
+				</control>
+				<control type="button" id="703">
+					<width>40</width>
+					<height>40</height>
+					<label>31048</label>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDPreNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDPreNF.png</texturenofocus>
+					<onclick>ActivateWindow(122)</onclick>
+					<enable>Visualisation.HasPresets</enable>
+					<animation effect="fade" start="100" end="50" time="100" condition="!Visualisation.HasPresets">Conditional</animation>
+				</control>
+				<control type="button" id="704">
+					<width>40</width>
+					<height>40</height>
+					<label>264</label>
+					<font>-</font>
+					<texturefocus colordiffuse="$VAR[Colour.500]">OSDRecordOffNF.png</texturefocus>
+					<texturenofocus colordiffuse="text.primary">OSDRecordOffNF.png</texturenofocus>
+					<onclick>XBMC.PlayerControl(record)</onclick>
+					<visible>Player.CanRecord</visible>
+					<animation effect="fade" start="100" end="50" time="100" condition="!Player.CanRecord">Conditional</animation>
+				</control>
 			</control>
 		</control>
 	</controls>

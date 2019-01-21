@@ -1,207 +1,561 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
-	<defaultcontrol always="true">15100</defaultcontrol>
-	<backgroundcolor>background</backgroundcolor>
-	<menucontrol>10000</menucontrol>
+	<defaultcontrol always="true">50</defaultcontrol>
+	<menucontrol>9000</menucontrol>
 	<controls>
-		<control type="button" id="20000">
-			<include>HiddenObject</include>
-			<animation effect="fade" time="300" start="100" end="0">Focus</animation>
-			<onfocus>SetFocus(2000)</onfocus>
-			<onclick>noop</onclick>
-			<visible allowhiddenfocus="true">Control.HasFocus(20000)</visible>
-		</control>
-		<control type="button" id="20001">
-			<include>HiddenObject</include>
-			<animation effect="fade" time="300" start="100" end="0">Focus</animation>
-			<onfocus>SetFocus(2000)</onfocus>
-			<onclick>noop</onclick>
-			<visible allowhiddenfocus="true">Control.HasFocus(20001)</visible>
-		</control>
-		<control type="button" id="10000">
-			<include>HiddenObject</include>
-			<onfocus>ActivateWindow(servicesettings,weather)</onfocus>
-			<onclick>noop</onclick>
-		</control>
-		<control type="videowindow">
-			<depth>DepthBackground</depth>
-			<include>FullScreenDimensions</include>
-			<visible>Player.HasVideo</visible>
-		</control>
-		<control type="visualisation">
-			<include>FullScreenDimensions</include>
-			<visible>Player.HasAudio</visible>
-		</control>
-		<control type="group">
-			<animation effect="zoom" center="auto" end="102,102" time="0" condition="Integer.IsGreater(System.StereoscopicMode,0)">conditional</animation>
-			<animation effect="fade" start="100" end="bg_alpha" time="0" condition="Player.HasMedia">Conditional</animation>
-			<animation effect="fade" start="0" end="100" time="300" condition="Window.Previous(fullscreenvideo) | Window.Previous(FullscreenGame) | Window.Previous(startup)">WindowOpen</animation>
-			<include>ColoredBackgroundImages</include>
-		</control>
+		<include>CommonBackground</include>
+		<include>Clock</include>
+		<include>CommonNowPlaying</include>
 		<control type="multiimage">
-			<depth>DepthBackground</depth>
-			<include>FullScreenDimensions</include>
-			<aspectratio>scale</aspectratio>
-			<fadetime>400</fadetime>
-			<animation effect="zoom" center="auto" end="102,102" time="0" condition="Integer.IsGreater(System.StereoscopicMode,0)">conditional</animation>
-			<animation effect="fade" start="0" end="100" time="400">WindowOpen</animation>
-			<animation effect="fade" start="100" end="0" time="300">WindowClose</animation>
-			<animation effect="fade" time="400">VisibleChange</animation>
-			<imagepath background="true" colordiffuse="bg_overlay">$VAR[WeatherFanartVar]</imagepath>
-			<visible>!Player.HasMedia</visible>
-		</control>
-		<control type="grouplist" id="2000">
-			<orientation>vertical</orientation>
-			<top>0</top>
-			<height>100%</height>
 			<left>0</left>
-			<ondown>20001</ondown>
-			<usecontrolcoords>true</usecontrolcoords>
-			<animation type="Conditional" condition="Control.IsVisible(20000)" reversible="false">
-				<effect type="slide" end="0,20" time="60" tween="sine" />
-				<effect type="slide" end="0,-20" time="180" tween="sine" delay="80" />
-			</animation>
-			<animation type="Conditional" condition="Control.IsVisible(20001)" reversible="false">
-				<effect type="slide" end="0,-20" time="60" tween="sine" />
-				<effect type="slide" end="0,20" time="180" tween="sine" delay="80" />
-			</animation>
-			<scrolltime tween="cubic" easing="out">500</scrolltime>
-			<include>OpenClose_Right</include>
-			<itemgap>-160</itemgap>
-			<control type="group" id="567">
-				<description>Weather info</description>
-				<height>410</height>
-				<left>22</left>
-				<control type="image">
-					<left>2.5%</left>
-					<top>100</top>
-					<width>95%</width>
-					<height>220</height>
-					<texture border="21">dialogs/dialog-bg.png</texture>
-				</control>
-				<control type="label">
-					<top>310</top>
-					<left>10%</left>
-					<width>80%</width>
-					<align>center</align>
-					<height>44</height>
-					<shadowcolor>text_shadow</shadowcolor>
-					<label>$LOCALIZE[31154]</label>
-					<visible>Control.HasFocus(20)</visible>
-					<animation effect="fade" time="400">VisibleChange</animation>
-				</control>
-				<control type="button" id="20">
-					<left>2.5%</left>
-					<top>100</top>
-					<width>95%</width>
-					<height>220</height>
-					<align>center</align>
-					<aligny>center</aligny>
-					<textoffsetx>40</textoffsetx>
-					<textoffsety>0</textoffsety>
-					<texturefocus border="40" colordiffuse="button_focus">buttons/button-fo.png</texturefocus>
-					<texturenofocus />
-					<onup>20000</onup>
-					<ondown>15100</ondown>
-					<font>font12</font>
-					<onclick>Weather.LocationNext</onclick>
-					<label></label>
-				</control>
-				<control type="label">
-					<right>100</right>
-					<top>194</top>
-					<aligny>center</aligny>
-					<height>24</height>
-					<width>500</width>
-					<align>right</align>
-					<font>WeatherTemp</font>
-					<label>$INFO[Weather.Temperature]</label>
-				</control>
-				<control type="label">
-					<right>400</right>
-					<top>164</top>
-					<align>right</align>
-					<label>[I]$LOCALIZE[402]: $INFO[Window(weather).Property(Current.FeelsLike)]$INFO[System.TemperatureUnits][/I][CR]$INFO[Weather.Conditions]</label>
-					<font>font14</font>
-					<width>630</width>
-				</control>
-				<control type="grouplist">
-					<top>154</top>
-					<left>90</left>
-					<right>800</right>
-					<align>justify</align>
-					<orientation>horizontal</orientation>
-					<include content="WeatherIcon">
-						<param name="label" value="Window(weather).Property(Current.Wind)" />
-						<param name="texture" value="icons/weather/wind.png" />
-						<param name="header" value="$LOCALIZE[404]" />
-					</include>
-					<include content="WeatherIcon">
-						<param name="label" value="Window(weather).Property(Current.Humidity)" />
-						<param name="texture" value="icons/weather/humidity.png" />
-						<param name="header" value="$LOCALIZE[406]" />
-					</include>
-					<include content="WeatherIcon">
-						<param name="label" value="Window(weather).Property(Current.Precipitation)" />
-						<param name="texture" value="icons/weather/rain.png" />
-						<param name="header" value="$LOCALIZE[33021]" />
-					</include>
-					<include content="WeatherIcon">
-						<param name="label" value="Window(weather).Property(Today.Sunrise)" />
-						<param name="texture" value="icons/weather/sunrise.png" />
-						<param name="header" value="$LOCALIZE[405]" />
-					</include>
-					<include content="WeatherIcon">
-						<param name="label" value="Window(weather).Property(Today.Sunset)" />
-						<param name="texture" value="icons/weather/sunset.png" />
-						<param name="header" value="$LOCALIZE[403]" />
-					</include>
+			<top>0</top>
+			<width>100%</width>
+			<height>100%</height>
+			<imagepath background="true">$INFO[Skin.String(WeatherFanartDir)]$INFO[Window(Weather).Property(Current.FanartCode)]</imagepath>
+			<timeperimage>10000</timeperimage>
+			<randomize>true</randomize>
+			<fadetime>1000</fadetime>
+			<include>VisibleFadeEffect</include>
+			<visible>Skin.HasSetting(ShowWeatherFanart) + !String.IsEmpty(Skin.String(WeatherFanartDir))</visible>
+			<animation effect="fade" time="200">WindowClose</animation>
+		</control>
+		<!--breadcrumbs-->
+		<include content="DynamicLeftBreadcrumb">
+			<param name="breadcrumb1-label" value="$LOCALIZE[8]" />
+			<param name="breadcrumb2-label" value="[LOWERCASE]$INFO[Window.Property(Location)][/LOWERCASE]" />
+			<param name="breadcrumb2-visible" value="true" />
+		</include>
+		<include content="DynamicLeftBreadcrumb">
+			<param name="breadcrumb-top" value="110" />
+			<param name="breadcrumb-height" value="34" />
+			<param name="breadcrumb-font" value="breadcrumb.secondary" />
+			<param name="breadcrumb1-label" value="$VAR[WeatherView]" />
+		</include>
+		<control type="group">
+			<include>VisibleFadeEffect</include>
+			<control type="group">
+				<control type="group" id="50">
+					<include>WeatherDaily</include>
+					<include>Weather36Hour</include>
+					<include>WeatherWeekend</include>
+					<include>WeatherHourly</include>
+					<include>WeatherMaps</include>
+					<include>WeatherAlerts</include>
 				</control>
 			</control>
-			<include content="WeatherWidget">
-				<param name="content_include" value="DailyItems" />
-				<param name="list_id" value="15100" />
-				<param name="widget_header" value="$LOCALIZE[31019]"/>
-				<param name="visible" value="!String.IsEmpty(Window(weather).Property(Daily.IsFetched))" />
-				<param name="width" value="258" />
-			</include>
-			<include content="WeatherWidget">
-				<param name="content_include" value="HourlyItems" />
-				<param name="list_id" value="15200" />
-				<param name="widget_header" value="$LOCALIZE[33036]"/>
-				<param name="visible" value="!String.IsEmpty(Window(weather).Property(Hourly.IsFetched))" />
-				<param name="width" value="258" />
-			</include>
-			<include content="WeatherMapItem">
-				<param name="item_id" value="1" />
-				<param name="onup_id" value="15100" />
-				<param name="ondown_id" value="70020" />
-			</include>
-			<include content="WeatherMapItem">
-				<param name="item_id" value="2" />
-				<param name="onup_id" value="70010" />
-				<param name="ondown_id" value="70030" />
-			</include>
-			<include content="WeatherMapItem">
-				<param name="item_id" value="3" />
-				<param name="onup_id" value="70020" />
-				<param name="ondown_id" value="70040" />
-			</include>
-			<include content="WeatherMapItem">
-				<param name="item_id" value="4" />
-				<param name="onup_id" value="70030" />
-				<param name="ondown_id" value="70050" />
-			</include>
-			<include content="WeatherMapItem">
-				<param name="item_id" value="5" />
-				<param name="onup_id" value="70040" />
-				<param name="ondown_id" value="20001" />
-			</include>
+			<control type="group">
+				<centerleft>50%</centerleft>
+				<centertop>50%</centertop>
+				<width>1670</width>
+				<height>700</height>
+				<animation effect="slide" start="2000,0" end="0,0" time="400" tween="quadratic" easing="out">WindowOpen</animation>
+				<animation effect="slide" start="0,0" end="2000,0" time="400" tween="quadratic" easing="out">WindowClose</animation>
+				<control type="group">
+					<right>0</right>
+					<width>730</width>
+					<!--background-->
+					<control type="image">
+						<left>-20</left>
+						<top>-20</top>
+						<width>750</width>
+						<height>730</height>
+						<texture border="20" colordiffuse="tertiary">backgrounds/info bg.png</texture>
+					</control>
+					<!--title background-->
+					<control type="image">
+						<left>0</left>
+						<top>0</top>
+						<width>710</width>
+						<height>60</height>
+						<texture background="true" colordiffuse="$VAR[Colour.500]">backgrounds/white.png</texture>
+					</control>
+					<!--sub title background-->
+					<control type="image">
+						<left>0</left>
+						<top>60</top>
+						<width>710</width>
+						<height>50</height>
+						<texture background="true" colordiffuse="$VAR[Colour.900]">backgrounds/white.png</texture>
+					</control>
+					<!--title shadow-->
+					<control type="image">
+						<left>0</left>
+						<top>60</top>
+						<width>710</width>
+						<height>20</height>
+						<texture>homeshadow.png</texture>
+						<animation effect="fade" start="100" end="75" time="0" condition="true">Conditional</animation>
+					</control>
+					<!--sub title shadow-->
+					<control type="image">
+						<left>0</left>
+						<top>110</top>
+						<width>710</width>
+						<height>10</height>
+						<texture>homeshadow.png</texture>
+						<animation effect="fade" start="100" end="75" time="0" condition="true">Conditional</animation>
+					</control>
+					<control type="label">
+						<description>header label</description>
+						<left>15</left>
+						<top>0</top>
+						<width>680</width>
+						<height>60</height>
+						<font>secondary.info.big</font>
+						<label>31300</label>
+						<align>left</align>
+						<aligny>center</aligny>
+						<textcolor>white</textcolor>
+					</control>
+					<control type="image">
+						<left>555</left>
+						<top>65</top>
+						<width>140</width>
+						<height>40</height>
+						<aspectratio align="right" aligny="center">keep</aspectratio>
+						<texture>$INFO[Window.Property(WeatherProviderLogo)]</texture>
+					</control>
+					<control type="label">
+						<description>Provider Text</description>
+						<left>555</left>
+						<top>60</top>
+						<width>140</width>
+						<height>50</height>
+						<font>kai.secondary</font>
+						<textcolor>white</textcolor>
+						<scroll>true</scroll>
+						<align>right</align>
+						<aligny>center</aligny>
+						<label>$INFO[Window.Property(WeatherProvider)]</label>
+						<visible>String.IsEmpty(Window.Property(WeatherProviderLogo))</visible>
+					</control>
+					<control type="group">
+						<control type="label">
+							<description>update label</description>
+							<left>15</left>
+							<top>0</top>
+							<width>680</width>
+							<height>60</height>
+							<font>kai.secondary</font>
+							<label>$LOCALIZE[31301] - $INFO[Window.Property(Updated)]</label>
+							<align>right</align>
+							<aligny>center</aligny>
+							<textcolor>white</textcolor>
+						</control>
+						<control type="label">
+							<description>weather location label</description>
+							<left>15</left>
+							<top>60</top>
+							<width>540</width>
+							<height>50</height>
+							<font>kai.secondary</font>
+							<textcolor>white</textcolor>
+							<scroll>false</scroll>
+							<align>left</align>
+							<aligny>center</aligny>
+							<label>$INFO[Window.Property(Location)]</label>
+						</control>
+						<control type="label">
+							<description>current temp Value</description>
+							<left>15</left>
+							<top>170</top>
+							<width>220</width>
+							<height>60</height>
+							<font>WeatherTemp</font>
+							<align>right</align>
+							<aligny>top</aligny>
+							<label>$INFO[Window.Property(Current.Temperature)]</label>
+							<textcolor>text.primary</textcolor>
+						</control>
+						<control type="label">
+							<description>current temp Value Units</description>
+							<left>230</left>
+							<top>200</top>
+							<width>150</width>
+							<height>60</height>
+							<font>font16</font>
+							<align>left</align>
+							<aligny>top</aligny>
+							<label>[B]$INFO[System.TemperatureUnits][/B]</label>
+							<textcolor>text.primary</textcolor>
+						</control>
+						<control type="image">
+							<description>current weather icon</description>
+							<left>340</left>
+							<top>130</top>
+							<width>300</width>
+							<height>300</height>
+							<info>Window.Property(Current.ConditionIcon)</info>
+							<aspectratio>keep</aspectratio>
+						</control>
+						<control type="label">
+							<description>current condition label</description>
+							<left>15</left>
+							<top>325</top>
+							<width>200</width>
+							<height>35</height>
+							<info>Window.Property(Current.Condition)</info>
+							<wrapmultiline>true</wrapmultiline>
+							<font>secondary.info</font>
+							<align>right</align>
+							<aligny>center</aligny>
+							<textcolor>text.primary</textcolor>
+						</control>
+					</control>
+					<control type="grouplist">
+						<left>0</left>
+						<top>440</top>
+						<width>200</width>
+						<height>270</height>
+						<itemgap>0</itemgap>
+						<control type="label">
+							<description>current feels like label</description>
+							<left>0</left>
+							<top>0</top>
+							<width>200</width>
+							<height>35</height>
+							<font>secondary.info</font>
+							<align>right</align>
+							<aligny>center</aligny>
+							<label>$LOCALIZE[402] :</label>
+							<textcolor>$VAR[Colour.500]</textcolor>
+							<visible>!String.IsEmpty(Window.Property(Current.FeelsLike))</visible>
+						</control>
+						<control type="label">
+							<description>current dew label</description>
+							<left>0</left>
+							<top>0</top>
+							<width>200</width>
+							<height>35</height>
+							<font>secondary.info</font>
+							<align>right</align>
+							<aligny>center</aligny>
+							<label>$LOCALIZE[405] :</label>
+							<textcolor>$VAR[Colour.500]</textcolor>
+							<visible>!String.IsEmpty(Window.Property(Current.DewPoint))</visible>
+						</control>
+						<control type="label">
+							<description>current humidity label</description>
+							<left>0</left>
+							<top>0</top>
+							<width>200</width>
+							<height>35</height>
+							<font>secondary.info</font>
+							<align>right</align>
+							<aligny>center</aligny>
+							<label>$LOCALIZE[406] :</label>
+							<textcolor>$VAR[Colour.500]</textcolor>
+							<visible>!String.IsEmpty(Window.Property(Current.Humidity))</visible>
+						</control>
+						<control type="label">
+							<description>current UV Index label</description>
+							<left>0</left>
+							<top>0</top>
+							<width>200</width>
+							<height>35</height>
+							<font>secondary.info</font>
+							<align>right</align>
+							<aligny>center</aligny>
+							<label>$LOCALIZE[403] :</label>
+							<textcolor>$VAR[Colour.500]</textcolor>
+							<visible>!String.IsEmpty(Window.Property(Current.UVIndex))</visible>
+						</control>
+						<control type="label">
+							<description>current Precipitation label</description>
+							<left>0</left>
+							<top>0</top>
+							<width>200</width>
+							<height>35</height>
+							<font>secondary.info</font>
+							<align>right</align>
+							<aligny>center</aligny>
+							<label>$LOCALIZE[33021] :</label>
+							<textcolor>$VAR[Colour.500]</textcolor>
+							<visible>!String.IsEmpty(Window.Property(Current.Precipitation))</visible>
+						</control>
+						<control type="label">
+							<description>current Wind label</description>
+							<left>0</left>
+							<top>0</top>
+							<width>200</width>
+							<height>35</height>
+							<font>secondary.info</font>
+							<align>right</align>
+							<aligny>center</aligny>
+							<label>$LOCALIZE[404] :</label>
+							<textcolor>$VAR[Colour.500]</textcolor>
+							<visible>!String.IsEmpty(Window.Property(Current.Wind))</visible>
+						</control>
+					</control>
+					<control type="grouplist">
+						<left>210</left>
+						<top>440</top>
+						<width>450</width>
+						<height>270</height>
+						<itemgap>0</itemgap>
+						<control type="label">
+							<description>current feels like Value</description>
+							<left>0</left>
+							<top>0</top>
+							<width>450</width>
+							<height>35</height>
+							<font>secondary.info</font>
+							<align>left</align>
+							<aligny>center</aligny>
+							<label>$INFO[Window.Property(Current.FeelsLike)]$INFO[System.TemperatureUnits]</label>
+							<textcolor>text.primary</textcolor>
+							<visible>!String.IsEmpty(Window.Property(Current.FeelsLike))</visible>
+						</control>
+						<control type="label">
+							<description>current dew Value</description>
+							<left>0</left>
+							<top>0</top>
+							<width>450</width>
+							<height>35</height>
+							<font>secondary.info</font>
+							<align>left</align>
+							<aligny>center</aligny>
+							<label>$INFO[Window.Property(Current.DewPoint)]$INFO[System.TemperatureUnits]</label>
+							<textcolor>text.primary</textcolor>
+							<visible>!String.IsEmpty(Window.Property(Current.DewPoint))</visible>
+						</control>
+						<control type="label">
+							<description>current humidity Value</description>
+							<left>0</left>
+							<top>0</top>
+							<width>450</width>
+							<height>35</height>
+							<font>secondary.info</font>
+							<align>left</align>
+							<aligny>center</aligny>
+							<info>Window.Property(Current.Humidity)</info>
+							<textcolor>text.primary</textcolor>
+							<visible>!String.IsEmpty(Window.Property(Current.Humidity))</visible>
+						</control>
+						<control type="label">
+							<description>current UV Index Value</description>
+							<left>0</left>
+							<top>0</top>
+							<width>450</width>
+							<height>35</height>
+							<font>secondary.info</font>
+							<align>left</align>
+							<aligny>center</aligny>
+							<info>Window.Property(Current.UVIndex)</info>
+							<textcolor>text.primary</textcolor>
+							<visible>!String.IsEmpty(Window.Property(Current.UVIndex))</visible>
+						</control>
+						<control type="label">
+							<description>current Precipitation Value</description>
+							<left>0</left>
+							<top>0</top>
+							<width>450</width>
+							<height>35</height>
+							<font>secondary.info</font>
+							<align>left</align>
+							<aligny>center</aligny>
+							<info>Window.Property(Current.Precipitation)</info>
+							<textcolor>text.primary</textcolor>
+							<visible>!String.IsEmpty(Window.Property(Current.Precipitation))</visible>
+						</control>
+						<control type="label">
+							<description>current Wind Value</description>
+							<left>0</left>
+							<top>0</top>
+							<width>450</width>
+							<height>35</height>
+							<font>secondary.info</font>
+							<align>left</align>
+							<aligny>center</aligny>
+							<info>Window.Property(Current.Wind)</info>
+							<textcolor>text.primary</textcolor>
+							<visible>!String.IsEmpty(Window.Property(Current.Wind))</visible>
+						</control>
+					</control>
+					<control type="group">
+						<visible>!String.IsEmpty(Window.Property(Today.IsFetched))</visible>
+						<control type="label">
+							<description>Sunrise Label</description>
+							<left>20</left>
+							<top>650</top>
+							<width>380</width>
+							<height>35</height>
+							<font>secondary.info</font>
+							<align>left</align>
+							<aligny>center</aligny>
+							<label>$LOCALIZE[33027] : [COLOR=text.primary]$INFO[Window.Property(Today.Sunrise)][/COLOR]</label>
+							<textcolor>$VAR[Colour.500]</textcolor>
+							<visible>!String.IsEmpty(Window.Property(Today.Sunrise))</visible>
+						</control>
+						<control type="label">
+							<description>Sunset label</description>
+							<left>310</left>
+							<top>650</top>
+							<width>380</width>
+							<height>35</height>
+							<font>secondary.info</font>
+							<align>right</align>
+							<aligny>center</aligny>
+							<label>$LOCALIZE[33028] : [COLOR=text.primary]$INFO[Window.Property(Today.Sunset)][/COLOR]</label>
+							<textcolor>$VAR[Colour.500]</textcolor>
+							<visible>!String.IsEmpty(Window.Property(Today.Sunset))</visible>
+						</control>
+					</control>
+				</control>
+			</control>
 		</control>
-		<include content="TopBar">
-			<param name="breadcrumbs_label" value="$LOCALIZE[8]$INFO[Window(Weather).Property(Location), / ]" />
-			<param name="sublabel" value="$INFO[Window(weather).Property(WeatherProvider)]" />
-		</include>
-		<include>BottomBar</include>
+		<include>BehindDialogFadeOut</include>
+		<control type="group">
+			<left>-375</left>
+			<include>SideBladeLeft</include>
+			<control type="group">
+				<top>100</top>
+				<bottom>0</bottom>
+				<control type="grouplist" id="9000">
+					<left>10</left>
+					<width>375</width>
+					<height>100%</height>
+					<onleft>9000</onleft>
+					<onright>50</onright>
+					<onup>9000</onup>
+					<ondown>9000</ondown>
+					<onback>50</onback>
+					<itemgap>0</itemgap>
+					<control type="group" id="300">
+						<width>375</width>
+						<height>60</height>
+						<control type="spincontrolex" id="3">
+							<description>change location button</description>
+							<left>0</left>
+							<top>0</top>
+							<font>-</font>
+							<include>ButtonCommonValues</include>
+							<onleft>50</onleft>
+							<onright>50</onright>
+							<onup>200</onup>
+							<ondown>302</ondown>
+							<onback>50</onback>
+						</control>
+						<control type="label" id="301">
+							<left>15</left>
+							<top>0</top>
+							<width>300</width>
+							<height>60</height>
+							<font>button</font>
+							<label>31027</label>
+							<textcolor>text.primary</textcolor>
+							<align>left</align>
+							<aligny>center</aligny>
+							<visible>!Control.HasFocus(3)</visible>
+						</control>
+						<control type="label" id="301">
+							<left>15</left>
+							<top>0</top>
+							<width>300</width>
+							<height>60</height>
+							<font>button</font>
+							<label>31027</label>
+							<textcolor>white</textcolor>
+							<align>left</align>
+							<aligny>center</aligny>
+							<visible>Control.HasFocus(3)</visible>
+						</control>
+					</control>
+					<control type="button" id="302">
+						<description>Daily forcast button</description>
+						<textwidth>352</textwidth>
+						<include>ButtonCommonValues</include>
+						<label>31904</label>
+						<onclick>ClearProperty(Weather.CurrentView)</onclick>
+						<visible>!String.IsEmpty(Window.Property(Daily.IsFetched))</visible>
+					</control>
+					<control type="button" id="303">
+						<description>36 hour forcast button</description>
+						<textwidth>352</textwidth>
+						<include>ButtonCommonValues</include>
+						<label>31901</label>
+						<onclick>SetProperty(Weather.CurrentView,36hour)</onclick>
+						<visible>!String.IsEmpty(Window.Property(36Hour.IsFetched))</visible>
+					</control>
+					<control type="button" id="304">
+						<description>Weekend forcast button</description>
+						<textwidth>352</textwidth>
+						<include>ButtonCommonValues</include>
+						<label>31903</label>
+						<onclick>SetProperty(Weather.CurrentView,weekend)</onclick>
+						<visible>!String.IsEmpty(Window.Property(Weekend.IsFetched))</visible>
+					</control>
+					<control type="button" id="305">
+						<description>Hourly forcast button</description>
+						<textwidth>352</textwidth>
+						<include>ButtonCommonValues</include>
+						<label>31902</label>
+						<onclick>SetProperty(Weather.CurrentView,hourly)</onclick>
+						<visible>!String.IsEmpty(Window.Property(Hourly.IsFetched))</visible>
+					</control>
+					<control type="button" id="306">
+						<description>Maps button</description>
+						<textwidth>352</textwidth>
+						<include>ButtonCommonValues</include>
+						<label>31910</label>
+						<onclick>SetProperty(Weather.CurrentView,map)</onclick>
+						<visible>!String.IsEmpty(Window.Property(Map.IsFetched))</visible>
+					</control>
+					<control type="button" id="307">
+						<description>Alerts button</description>
+						<textwidth>352</textwidth>
+						<include>ButtonCommonValues</include>
+						<label>33050</label>
+						<onclick>SetProperty(Weather.CurrentView,alerts)</onclick>
+						<visible>!String.IsEmpty(Window.Property(Alerts.IsFetched))</visible>
+					</control>
+					<!--choose colour-->
+					<control type="button" id="320">
+						<label>$LOCALIZE[31919]</label>
+						<include>ButtonCommonValues</include>
+						<onclick>SetFocus(50)</onclick>
+						<onclick>ActivateWindow(1100)</onclick>
+					</control>
+					<control type="button" id="2">
+						<description>Refresh button</description>
+						<textwidth>352</textwidth>
+						<include>ButtonCommonValues</include>
+						<label>103</label>
+					</control>
+					<control type="button" id="5">
+						<description>Custom Weather Script Button</description>
+						<label>$INFO[Skin.String(WeatherScript_Label)]</label>
+						<onclick>SetFocus(50)</onclick>
+						<onclick>RunScript($INFO[Skin.String(WeatherScript_Path)])</onclick>
+						<onclick>SetFocus(50)</onclick>
+						<textwidth>352</textwidth>
+						<include>ButtonCommonValues</include>
+						<visible>Skin.HasSetting(WeatherScript_Enable) + !String.IsEmpty(Skin.String(WeatherScript_Label))</visible>
+					</control>
+					<control type="button" id="4">
+						<description>Settings button</description>
+						<label>5</label>
+						<onclick>ClearProperty(Weather.CurrentView)</onclick>
+						<onclick>ActivateWindow(servicesettings,weather)</onclick>
+						<textwidth>352</textwidth>
+						<include>ButtonCommonValues</include>
+					</control>
+					<control type="radiobutton" id="250">
+						<description>Fanart Toggle</description>
+						<include>ButtonCommonValues</include>
+						<label>31307</label>
+						<onclick>Skin.ToggleSetting(ShowWeatherFanart)</onclick>
+						<selected>!Skin.HasSetting(ShowWeatherFanart)</selected>
+					</control>
+					<control type="button" id="251">
+						<include>ButtonCommonValues</include>
+						<label>31317</label>
+						<onclick>Skin.SetPath(WeatherFanartDir)</onclick>
+						<enable>Skin.HasSetting(ShowWeatherFanart)</enable>
+					</control>
+					<include>CommonNowPlaying_Controls</include>
+				</control>
+			</control>
+		</control>
 	</controls>
 </window>

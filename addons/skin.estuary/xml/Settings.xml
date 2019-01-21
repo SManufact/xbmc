@@ -1,128 +1,169 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <window>
-	<defaultcontrol>9000</defaultcontrol>
-	<backgroundcolor>background</backgroundcolor>
+	<defaultcontrol always="true">9000</defaultcontrol>
 	<controls>
-		<include>DefaultBackground</include>
-		<control type="multiimage">
-			<depth>DepthBackground</depth>
-			<include>FullScreenDimensions</include>
-			<aspectratio>scale</aspectratio>
-			<animation effect="zoom" center="auto" end="102,102" time="0" condition="Integer.IsGreater(System.StereoscopicMode,0)">conditional</animation>
-			<animation effect="fade" start="0" end="100" time="400" reversible="true" condition="!Window.Previous(SettingsCategory.xml)">WindowOpen</animation>
-			<animation effect="fade" start="100" end="0" time="300" reversible="true" condition="!Window.Next(SettingsCategory.xml)">WindowClose</animation>
-			<animation effect="fade" time="400">VisibleChange</animation>
-			<imagepath colordiffuse="35FFFFFF">$INFO[Skin.String(HomeFanart.path)]settings$INFO[Skin.String(HomeFanart.ext)]</imagepath>
-			<visible>!Player.HasMedia + !String.IsEmpty(Skin.String(HomeFanart.path))</visible>
-		</control>
+		<include>CommonBackground</include>
+		<include>Clock</include>
+		<include>CommonNowPlaying</include>
+		<!--breadcrumbs-->
+		<include content="DynamicLeftBreadcrumb">
+			<param name="breadcrumb1-label" value="$LOCALIZE[5]" />
+		</include>
+		<!--main content-->
 		<control type="group">
 			<centerleft>50%</centerleft>
-			<width>1600</width>
-			<top>0</top>
-			<bottom>0</bottom>
-			<include>OpenClose_Right</include>
+			<centertop>50%</centertop>
+			<width>1390</width>
+			<height>783</height>
+			<animation effect="slide" start="0,1512" end="0,0" time="400" tween="quadratic" easing="out" condition="!Window.Previous(SettingsCategory.xml) + !Window.Previous(SkinSettings.xml)">WindowOpen</animation>
+			<animation effect="slide" start="0,0" end="0,1512" time="400" tween="quadratic" easing="out" condition="!Window.Next(SettingsCategory.xml) + !Window.Next(SkinSettings.xml)">WindowClose</animation>
+			<animation effect="slide" start="-2015,0" end="0,0" time="400" tween="quadratic" easing="out" condition="Window.Previous(SettingsCategory.xml) | Window.Previous(SkinSettings.xml)">WindowOpen</animation>
+			<animation effect="slide" start="0,0" end="-2015,0" time="400" tween="quadratic" easing="out" condition="Window.Next(SettingsCategory.xml) | Window.Next(SkinSettings.xml)">WindowClose</animation>
+			<!--title bars and backgrounds-->
+			<include content="DynamicDialogBackground">
+				<param name="dialog-width" value="1390" />
+				<param name="dialog-height" value="783" />
+				<param name="glow-width" value="1470" />
+				<param name="glow-height" value="863" />
+				<param name="sidebar-visible" value="true" />
+				<param name="background-visible" value="true" />
+			</include>
+			<!--close window button-->
+			<control type="button">
+				<left>5</left>
+				<width>50</width>
+				<height>25</height>
+				<label>-</label>
+				<font>-</font>
+				<onclick>PreviousMenu</onclick>
+				<texturefocus>DialogCloseButton-focus.png</texturefocus>
+				<texturenofocus>DialogCloseButton.png</texturenofocus>
+				<onleft>9000</onleft>
+				<onright>9000</onright>
+				<onup>9000</onup>
+				<ondown>9000</ondown>
+				<visible>system.getbool(input.enablemouse)</visible>
+			</control>
+			<!--title-->
 			<control type="label">
-				<left>0</left>
-				<right>0</right>
-				<top>420</top>
-				<height>400</height>
-				<label>$LOCALIZE[5]</label>
-				<align>center</align>
-				<font>font37</font>
+				<left>45</left>
+				<top>25</top>
+				<width>1545</width>
+				<height>60</height>
+				<font>info.title</font>
+				<align>left</align>
+				<aligny>center</aligny>
+				<textcolor>white</textcolor>
+				<label>$LOCALIZE[31000] $LOCALIZE[5]</label>
 			</control>
-			<control type="panel" id="9000">
-				<left>0</left>
-				<width>100%</width>
+			<!--content list-->
+			<control type="list" id="9000">
+				<left>10</left>
 				<top>120</top>
-				<height>300</height>
-				<onup>noop</onup>
-				<ondown>Control.SetFocus(9001,$INFO[Container(9000).Position],absolute)</ondown>
-				<include>SettingsPanel</include>
+				<width>390</width>
+				<height>650</height>
+				<onleft>9000</onleft>
+				<onright>9001</onright>
+				<onup>9000</onup>
+				<ondown>9000</ondown>
+				<pagecontrol>-</pagecontrol>
+				<scrolltime>300</scrolltime>
+				<itemlayout height="65" width="355">
+					<control type="label">
+						<left>15</left>
+						<top>0</top>
+						<width>325</width>
+						<height>60</height>
+						<font>button</font>
+						<textcolor>white</textcolor>
+						<align>left</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+				</itemlayout>
+				<focusedlayout height="65" width="355">
+					<control type="image">
+						<left>0</left>
+						<top>0</top>
+						<width>355</width>
+						<height>60</height>
+						<texture colordiffuse="white">backgrounds/white.png</texture>
+					</control>
+					<control type="label">
+						<left>15</left>
+						<top>0</top>
+						<width>325</width>
+						<height>60</height>
+						<font>button</font>
+						<textcolor>shadow</textcolor>
+						<align>left</align>
+						<aligny>center</aligny>
+						<label>$INFO[ListItem.Label]</label>
+					</control>
+				</focusedlayout>
 				<content>
 					<item>
-						<label>$LOCALIZE[10003]</label>
-						<onclick>ActivateWindow(filemanager)</onclick>
-						<icon>icons/settings/filemanager.png</icon>
+						<label>14201</label>
+						<label2>31401</label2>
+						<onclick>ActivateWindow(PlayerSettings)</onclick>
+						<icon>-</icon>
 					</item>
 					<item>
-						<label>$LOCALIZE[24001]</label>
-						<onclick>ActivateWindow(addonbrowser)</onclick>
-						<icon>icons/settings/addons.png</icon>
+						<label>14205</label>
+						<label2>31409</label2>
+						<onclick>ActivateWindow(PVRSettings)</onclick>
+						<icon>-</icon>
 					</item>
 					<item>
-						<label>$LOCALIZE[138]</label>
-						<onclick>ActivateWindow(systeminfo)</onclick>
-						<icon>icons/settings/sysinfo.png</icon>
+						<label>14212</label>
+						<label2>31401</label2>
+						<onclick>ActivateWindow(MediaSettings)</onclick>
+						<icon>-</icon>
 					</item>
 					<item>
-						<label>$LOCALIZE[31067]</label>
-						<onclick>ActivateWindow(eventlog)</onclick>
-						<icon>icons/settings/eventlog.png</icon>
+						<label>24001</label>
+						<label2>31408</label2>
+						<onclick>ActivateWindow(AddonBrowser)</onclick>
+						<icon>-</icon>
+					</item>
+					<item>
+						<label>14036</label>
+						<label2>31410</label2>
+						<onclick>ActivateWindow(ServiceSettings)</onclick>
+						<icon>-</icon>
+					</item>
+					<item>
+						<label>14207</label>
+						<label2>31400</label2>
+						<onclick>ActivateWindow(InterfaceSettings)</onclick>
+						<icon>-</icon>
+					</item>
+					<item>
+						<label>14209</label>
+						<label2>31406</label2>
+						<onclick>ActivateWindow(SystemSettings)</onclick>
+						<icon>-</icon>
+					</item>
+					<item>
+						<label>166</label>
+						<label2>-</label2>
+						<onclick>ActivateWindow(SkinSettings)</onclick>
+						<icon>-</icon>
 					</item>
 				</content>
 			</control>
-			<control type="panel" id="9001">
-				<left>0</left>
-				<right>0</right>
-				<top>470</top>
-				<bottom>0</bottom>
-				<onup>Control.SetFocus(9000,$INFO[Container(9001).Position],absolute)</onup>
-				<ondown>noop</ondown>
-				<include>SettingsPanel</include>
-				<content>
-					<item>
-						<label>$LOCALIZE[14200]</label>
-						<onclick>ActivateWindow(PlayerSettings)</onclick>
-						<icon>icons/settings/player.png</icon>
-					</item>
-					<item>
-						<label>$LOCALIZE[14211]</label>
-						<onclick>ActivateWindow(MediaSettings)</onclick>
-						<icon>icons/settings/media.png</icon>
-					</item>
-					<item>
-						<label>$LOCALIZE[14204]</label>
-						<onclick>ActivateWindow(PVRSettings)</onclick>
-						<icon>icons/settings/livetv.png</icon>
-					</item>
-					<item>
-						<label>$LOCALIZE[14036]</label>
-						<onclick>ActivateWindow(ServiceSettings)</onclick>
-						<icon>icons/settings/network.png</icon>
-					</item>
-					<item>
-						<label>$LOCALIZE[15016]</label>
-						<visible>System.GetBool(gamesgeneral.enable)</visible>
-						<onclick>ActivateWindow(GameSettings)</onclick>
-						<icon>icons/settings/games.png</icon>
-					</item>
-					<item>
-						<label>$LOCALIZE[14206]</label>
-						<onclick>ActivateWindow(InterfaceSettings)</onclick>
-						<icon>icons/settings/interface.png</icon>
-					</item>
-					<item>
-						<label>$LOCALIZE[13200]</label>
-						<onclick>ActivateWindow(Profiles)</onclick>
-						<icon>icons/settings/profiles.png</icon>
-					</item>
-					<item>
-						<label>$LOCALIZE[13000]</label>
-						<onclick>ActivateWindow(SystemSettings)</onclick>
-						<icon>icons/settings/system.png</icon>
-					</item>
-					<item>
-						<label>LibreELEC</label>
-						<onclick>RunAddon(service.libreelec.settings)</onclick>
-						<icon>icons/settings/libreelec.png</icon>
-						<visible>System.HasAddon(service.libreelec.settings)</visible>
-					</item>
-				</content>
+			<!--setting description-->
+			<control type="textbox">
+				<left>395</left>
+				<top>210r</top>
+				<width>965</width>
+				<height>198</height>
+				<font>label</font>
+				<label>$INFO[Container(9000).ListItem.Label2]</label>
+				<align>justify</align>
+				<textcolor>white</textcolor>
 			</control>
 		</control>
-		<include content="TopBar">
-			<param name="breadcrumbs_label" value="$LOCALIZE[13000]" />
-		</include>
-		<include>BottomBar</include>
+		<include>BehindDialogFadeOut</include>
 	</controls>
 </window>
