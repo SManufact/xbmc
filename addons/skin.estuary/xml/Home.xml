@@ -106,13 +106,13 @@
 				
 					<item id="1">
 						<label>31961</label>
-						<onclick>XBMC.RunScript(/usr/bin/frontend-retroarch.py)</onclick>
+						<onclick>XBMC.RunScript(/usr/bin/frontend-emulationstation.py)</onclick>
 						<icon>-</icon>
 						<thumb>-</thumb>
 					</item>
 					<item id="2">
 						<label>31962</label>
-						<onclick>XBMC.RunScript(/usr/bin/moonlight.sh)</onclick>
+						<onclick>XBMC.RunScript(usr/bin/frontend-retroarch.py)</onclick>
 						<icon>-</icon>
 						<thumb>-</thumb>
 					</item>
@@ -161,12 +161,6 @@
 					<item id="10">
 						<label>31964</label>
 						<onclick>ActivateWindow(SystemSettings)</onclick>
-						<icon>-</icon>
-						<thumb>-</thumb>
-					</item>
-					<item id="11">
-						<label>31965</label>
-						<onclick>ActivateWindow(InterfaceSettings)</onclick>
 						<icon>-</icon>
 						<thumb>-</thumb>
 					</item>

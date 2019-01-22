@@ -690,11 +690,11 @@ msgid "RADIO"
 msgstr ""
 
 msgctxt "#31961"
-msgid "GAMES"
+msgid "LIBRARY"
 msgstr ""
 
 msgctxt "#31962"
-msgid "STEAM"
+msgid "EMULATOR"
 msgstr ""
 
 msgctxt "#31963"

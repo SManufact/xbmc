@@ -2077,7 +2077,7 @@
               <condition>HAVE_IOS</condition>
             </or>
           </requirement>
-          <level>0</level>
+          <level>4</level>
           <default>Default</default>
           <constraints>
             <options>monitors</options>
@@ -2108,7 +2108,7 @@
           </control>
         </setting>
         <setting id="videoscreen.resolution" type="integer" parent="videoscreen.screen" label="169" help="36352">
-          <level>0</level>
+          <level>4</level>
           <default>16</default> <!-- RES_DESKTOP -->
           <constraints>
             <options>resolutions</options>
@@ -2123,7 +2123,7 @@
         </setting>
         <setting id="videoscreen.screenmode" type="string" parent="videoscreen.screen" label="243" help="36353">
           <requirement>IsStandAlone</requirement>
-          <level>0</level>
+          <level>4</level>
           <default>DESKTOP</default>
           <constraints>
             <options>refreshrates</options>
@@ -2707,11 +2707,11 @@
           <visible>false</visible>
         </setting>
         <setting id="input.controllerconfig" type="action" label="35063" help="35064">
-          <level>4</level>
+          <level>0</level>
           <control type="button" format="action" />
         </setting>
         <setting id="input.rumblenotify" type="boolean" label="35053" help="35054">
-          <level>4</level>
+          <level>0</level>
           <dependencies>
             <dependency type="visible" on="property" name="HasRumbleFeature" />
           </dependencies>
@@ -2719,7 +2719,7 @@
           <default>false</default>
         </setting>
         <setting id="input.testrumble" type="action" label="35051" help="35052">
-          <level>4</level>
+          <level>0</level>
           <dependencies>
             <dependency type="visible" on="property" name="HasRumbleFeature" />
             <dependency type="enable" on="property" name="HasRumbleController" />
@@ -2727,7 +2727,7 @@
           <control type="button" format="action" />
         </setting>
         <setting id="input.controllerpoweroff" type="boolean" label="35088" help="35089">
-          <level>4</level>
+          <level>0</level>
           <dependencies>
             <dependency type="visible" on="property" name="HasPowerOffFeature" />
           </dependencies>
@@ -3240,7 +3240,7 @@
     <category id="regional" label="14222" help="36113">
       <group id="1" label="14218">
         <setting id="locale.language" type="addon" label="248" help="36114">
-          <level>0</level>
+          <level>4</level>
           <default>resource.language.en_gb</default>
           <constraints>
             <addontype>kodi.resource.language</addontype>
@@ -3381,7 +3381,7 @@
     <category id="screensaver" label="360" help="36128">
       <group id="1" label="16000">
         <setting id="screensaver.mode" type="addon" label="356" help="36130">
-          <level>0</level>
+          <level>4</level>
           <default>default</default> <!-- will be properly set on startup -->
           <constraints>
             <addontype>xbmc.ui.screensaver</addontype>
@@ -3414,7 +3414,7 @@
           <control type="button" format="action" />
         </setting>
         <setting id="screensaver.time" type="integer" label="355" help="36129">
-          <level>0</level>
+          <level>4</level>
           <default>3</default>
           <constraints>
             <minimum>1</minimum>

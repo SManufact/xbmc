@@ -1,10 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <colors>
-	<color name="white">FFF0F0F0</color>
-	<color name="lightgrey">FFD0D0D0</color>
-	<color name="grey">FFA0A0A0</color>
-	<color name="grey2">FF777777</color>
-	<color name="grey3">FF2C2C2C</color>
+	<color name="white">FFF1F1F1</color>
+	<color name="grey">FFb4b4b4</color>
+	<color name="grey2">FF999999</color>
+	<color name="grey3">FF505050</color>
 	<color name="black">FF000000</color>
-	<color name="blue">FF12B2E7</color>
-	<color name="selected">FF11E7B1</color>
+	<color name="blue">FF0084ff</color>
+	<color name="selected">FF9c27b0</color>
+	<color name="invalid">FF908e8e</color>
+	<color name="shadow">FF673ab7</color>
+	
+	
+	<color name="bg.overlay">35000000</color>
+	<color name="dialog.overlay">50000000</color>
+	<color name="button.nf">FF673ab7</color>
+	<color name="text.primary">FFEEEEEE</color>
+	<color name="text.secondary">FF666666</color>
+	<color name="disabled">AA606060</color>
+	
+	<color name="primary">FFFFFFFF</color>
+	<color name="secondary">FFAAAAAA</color>
+	<color name="tertiary">FF9c27b0</color>
+	
+	<color name="button.border">FF9c27b0</color>
+	
+	
+	<color name="red">FF9c27b0</color>
+	<color name="green">FF9c27b0</color>
+	<color name="pink">FF9c27b0</color>
+	<color name="orange">FF9c27b0</color>
 </colors>
