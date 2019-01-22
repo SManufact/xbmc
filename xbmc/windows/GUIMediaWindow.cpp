@@ -865,38 +865,38 @@ bool CGUIMediaWindow::Update(const std::string &strDirectory, bool updateFilterP
 
   int iWindow = GetID();
   int showLabel = 0;
-  if (URIUtils::PathEquals(path, GetRootPath()))
-  {
-    if (iWindow == WINDOW_PICTURES)
-      showLabel = 997;
-    else if (iWindow == WINDOW_FILES)
-      showLabel = 1026;
-    else if (iWindow == WINDOW_GAMES)
-      showLabel = 35250; // "Add games..."
-  }
-  if (m_vecItems->IsPath("sources://video/"))
-    showLabel = 999;
-  else if (m_vecItems->IsPath("sources://music/"))
-    showLabel = 998;
-  else if (m_vecItems->IsPath("sources://pictures/"))
-    showLabel = 997;
-  else if (m_vecItems->IsPath("sources://files/"))
-    showLabel = 1026;
-  else if (m_vecItems->IsPath("sources://games/"))
-    showLabel = 35250; // "Add games..."
-  if (showLabel && (m_vecItems->Size() == 0 || !m_guiState->DisableAddSourceButtons())) // add 'add source button'
-  {
-    std::string strLabel = g_localizeStrings.Get(showLabel);
-    CFileItemPtr pItem(new CFileItem(strLabel));
-    pItem->SetPath("add");
-    pItem->SetIconImage("DefaultAddSource.png");
-    pItem->SetLabel(strLabel);
-    pItem->SetLabelPreformatted(true);
-    pItem->m_bIsFolder = true;
-    pItem->SetSpecialSort(CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_addSourceOnTop ?
-                                             SortSpecialOnTop : SortSpecialOnBottom);
-    m_vecItems->Add(pItem);
-  }
+//  if (URIUtils::PathEquals(path, GetRootPath()))
+//  {
+//    if (iWindow == WINDOW_PICTURES)
+//      showLabel = 997;
+//    else if (iWindow == WINDOW_FILES)
+//      showLabel = 1026;
+//    else if (iWindow == WINDOW_GAMES)
+//      showLabel = 35250; // "Add games..."
+//  }
+//  if (m_vecItems->IsPath("sources://video/"))
+//    showLabel = 999;
+//  else if (m_vecItems->IsPath("sources://music/"))
+//    showLabel = 998;
+//  else if (m_vecItems->IsPath("sources://pictures/"))
+//    showLabel = 997;
+//  else if (m_vecItems->IsPath("sources://files/"))
+//    showLabel = 1026;
+//  else if (m_vecItems->IsPath("sources://games/"))
+//    showLabel = 35250; // "Add games..."
+//  if (showLabel && (m_vecItems->Size() == 0 || !m_guiState->DisableAddSourceButtons())) // add 'add source button'
+//  {
+//    std::string strLabel = g_localizeStrings.Get(showLabel);
+//    CFileItemPtr pItem(new CFileItem(strLabel));
+//    pItem->SetPath("add");
+//    pItem->SetIconImage("DefaultAddSource.png");
+//    pItem->SetLabel(strLabel);
+//    pItem->SetLabelPreformatted(true);
+//    pItem->m_bIsFolder = true;
+//    pItem->SetSpecialSort(CServiceBroker::GetSettingsComponent()->GetAdvancedSettings()->m_addSourceOnTop ?
+//                                             SortSpecialOnTop : SortSpecialOnBottom);
+//    m_vecItems->Add(pItem);
+//  }
   m_iLastControl = GetFocusedControlID();
 
   // Check whether to enabled advanced filtering based on the content type

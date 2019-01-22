@@ -207,7 +207,7 @@
         </setting>
         <setting id="videoplayer.usedxva2" type="boolean" label="13427" help="36158">
           <requirement>HasDXVA2</requirement>
-          <level>2</level>
+          <level>4</level>
           <default>true</default>
           <control type="toggle" />
         </setting>
@@ -863,7 +863,7 @@
 		  <default>false</default>
         </setting>
         <setting id="musiclibrary.import" type="action" label="14249" help="36263">
-          <level>2</level>
+          <level>4</level>
           <control type="button" format="action" />
         </setting>
       </group>
@@ -3261,7 +3261,7 @@
           <control type="list" format="string" />
         </setting>
         <setting id="locale.keyboardlayouts" type="list[string]" label="310" help="36432">
-          <level>0</level>
+          <level>4</level>
           <default>English QWERTY</default>
           <constraints>
             <options>keyboardlayouts</options>
@@ -3274,7 +3274,7 @@
           </control>
         </setting>
         <setting id="locale.activekeyboardlayout" type="string" label="0" help="0">
-          <level>0</level>
+          <level>4</level>
           <default>English QWERTY</default>
         </setting>
       </group>

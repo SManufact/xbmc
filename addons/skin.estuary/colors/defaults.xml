@@ -14,12 +14,12 @@
 	<color name="bg.overlay">35000000</color>
 	<color name="dialog.overlay">50000000</color>
 	<color name="button.nf">FF673ab7</color>
-	<color name="text.primary">FFEEEEEE</color>
-	<color name="text.secondary">FF666666</color>
+	<color name="text.primary">FFFFFFFF</color>
+	<color name="text.secondary">FF9c27b0</color>
 	<color name="disabled">AA606060</color>
 	
 	<color name="primary">FFFFFFFF</color>
-	<color name="secondary">FFAAAAAA</color>
+	<color name="secondary">FF673ab7</color>
 	<color name="tertiary">FF9c27b0</color>
 	
 	<color name="button.border">FF9c27b0</color>
