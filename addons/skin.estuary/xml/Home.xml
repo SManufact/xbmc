@@ -112,7 +112,7 @@
 					</item>
 					<item id="2">
 						<label>31962</label>
-						<onclick>XBMC.RunScript(/usr/bin/moonlight-embedded.py)</onclick>
+						<onclick>XBMC.RunScript(/usr/bin/moonlight.sh)</onclick>
 						<icon>-</icon>
 						<thumb>-</thumb>
 					</item>
