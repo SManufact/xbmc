@@ -10,12 +10,12 @@
           <visible>false</visible>
         </setting>
         <setting id="videoplayer.usemmal" type="boolean" label="36434" help="36435">
-          <level>2</level>
+          <level>4</level>
           <default>true</default>
           <control type="toggle" />
         </setting>
         <setting id="videoplayer.limitguiupdate" type="integer" label="38013" help="38014">
-          <level>2</level>
+          <level>4</level>
           <default>10</default>
           <constraints>
             <minimum label="38015">0</minimum> <!-- Unlimited -->
@@ -58,12 +58,12 @@
           <visible>false</visible>
         </setting>
         <setting id="videoscreen.textures32" type="boolean" label="37020" help="36547">
-          <level>2</level>
+          <level>4</level>
           <default>false</default>
           <control type="toggle" />
         </setting>
         <setting id="videoscreen.limitgui" type="integer" label="37021" help="36548">
-          <level>2</level>
+          <level>4</level>
           <default>0</default>
           <constraints>
             <options>
@@ -80,7 +80,7 @@
       </group>
       <group id="2">
         <setting id="videoscreen.framepacking" type="boolean" label="38029" help="38030">
-          <level>2</level>
+          <level>4</level>
           <default>false</default>
           <control type="toggle" />
         </setting>
@@ -104,7 +104,7 @@
           <default>PI:HDMI</default>
         </setting>
         <setting id="audiooutput.plladjust" type="integer" label="38200" help="38201">
-          <level>3</level>
+          <level>4</level>
           <default>0</default>
           <constraints>
             <options>
@@ -126,7 +126,7 @@
     <category id="input">
       <group id="4" label="35150">
         <setting id="input.libinputkeyboardlayout" type="string" label="310" help="36436">
-          <level>0</level>
+          <level>4</level>
           <default>us</default>
           <visible>true</visible>
           <constraints>

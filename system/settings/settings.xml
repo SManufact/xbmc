@@ -2108,7 +2108,7 @@
           </control>
         </setting>
         <setting id="videoscreen.resolution" type="integer" parent="videoscreen.screen" label="169" help="36352">
-          <level>4</level>
+          <level>0</level>
           <default>16</default> <!-- RES_DESKTOP -->
           <constraints>
             <options>resolutions</options>
