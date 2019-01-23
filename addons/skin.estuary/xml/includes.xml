@@ -74,26 +74,26 @@
 		<value condition="Player.Rewinding32x">$LOCALIZE[31045] 32x</value>
 	</variable>
 	<variable name="Colour.500">
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Red)">FFe51c23</value>
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Pink)">FFe91e63</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Red)">FF9c27b0</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Pink)">FF9c27b0</value>
 		<value condition="String.IsEqual(Skin.String(Colour.Theme),Purple)">FF9c27b0</value>
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Deep Purple)">FF673ab7</value>
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Indigo)">FF3f51b5</value>
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Blue)">FF5677fc</value>
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Light Blue)">FF03a9f4</value>
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Cyan)">FF00bcd4</value>
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Teal)">FF009688</value>
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Green)">FF259b24</value>
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Light Green)">FF8bc34a</value>
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Lime)">FFcddc39</value>
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Yellow)">FFf6e233</value>
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Amber)">FFf6b904</value>
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Orange)">FFff9800</value>
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Deep Orange)">FFff5722</value>
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Brown)">FF795548</value>
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Blue Grey)">FF587482</value>
-		<value condition="String.IsEqual(Skin.String(Colour.Theme),Grey)">FF908e8e</value>
-		<value>FFe51c23</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Deep Purple)">FF9c27b0</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Indigo)">FF9c27b0</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Blue)">FF9c27b0</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Light Blue)">FF9c27b0</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Cyan)">FF9c27b0</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Teal)">FF9c27b0</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Green)">FF9c27b0</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Light Green)">FF9c27b0</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Lime)">FF9c27b0</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Yellow)">FF9c27b0</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Amber)">FF9c27b0</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Orange)">FF9c27b0</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Deep Orange)">FF9c27b0</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Brown)">FF9c27b0</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Blue Grey)">FF9c27b0</value>
+		<value condition="String.IsEqual(Skin.String(Colour.Theme),Grey)">FF9c27b0</value>
+		<value>FF9c27b0</value>
 	</variable>
 	<variable name="Colour.900">
 		<value condition="String.IsEqual(Skin.String(Colour.Theme),Red)">FF850a04</value>
