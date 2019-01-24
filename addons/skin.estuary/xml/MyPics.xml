@@ -42,7 +42,7 @@
 		<include>CommonNowPlaying</include>
 		<include>ScrollOffsetLabel</include>
 		<!--breadcrumbs-->
-		<include content="DynamicLeftBreadcrumb">
+<!-- 		<include content="DynamicLeftBreadcrumb">
 			<param name="breadcrumb1-label" value="$LOCALIZE[1]" />
 			<param name="breadcrumb2-label" value="[LOWERCASE]$INFO[Container.FolderName][/LOWERCASE]" />
 			<param name="breadcrumb2-visible" value="!String.IsEmpty(Container.FolderName)" />
@@ -56,7 +56,7 @@
 			<param name="breadcrumb2-visible" value="true" />
 		</include>
 		<include>BehindDialogFadeOut</include>
-		<!--view options-->
+-->		<!--view options-->
 		<control type="group">
 			<left>-375</left>
 			<include>SideBladeLeft</include>

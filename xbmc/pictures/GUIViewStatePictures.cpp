@@ -81,7 +81,7 @@ VECSOURCES& CGUIViewStateWindowPictures::GetSources()
   }
 
   // Picture add-ons
-  AddAddonsSource("image", g_localizeStrings.Get(1039), "DefaultAddonPicture.png");
+//  AddAddonsSource("image", g_localizeStrings.Get(1039), "DefaultAddonPicture.png");
 
   // Global sources
   AddOrReplace(*pictureSources, CGUIViewState::GetSources());

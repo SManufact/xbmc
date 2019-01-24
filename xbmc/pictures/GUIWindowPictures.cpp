@@ -162,26 +162,26 @@ void CGUIWindowPictures::UpdateButtons()
 
   // check we can slideshow or recursive slideshow
   int nFolders = m_vecItems->GetFolderCount();
-//  if (nFolders == m_vecItems->Size() ||
-//      m_vecItems->GetPath() == "addons://sources/image/")
-//  {
-//    CONTROL_DISABLE(CONTROL_BTNSLIDESHOW);
-//  }
-//  else
-//  {
-//    CONTROL_ENABLE(CONTROL_BTNSLIDESHOW);
-//  }
-//  if (m_guiState.get() && !m_guiState->HideParentDirItems())
+  if (nFolders == m_vecItems->Size() ||
+      m_vecItems->GetPath() == "addons://sources/image/")
+  {
+    CONTROL_DISABLE(CONTROL_BTNSLIDESHOW);
+  }
+  else
+  {
+    CONTROL_ENABLE(CONTROL_BTNSLIDESHOW);
+  }
+  if (m_guiState.get() && !m_guiState->HideParentDirItems())
     nFolders--;
-//  if (m_vecItems->Size() == 0 || nFolders == 0 ||
-//      m_vecItems->GetPath() == "addons://sources/image/")
-//  {
-//    CONTROL_DISABLE(CONTROL_BTNSLIDESHOW_RECURSIVE);
-//  }
-//  else
-//  {
-//    CONTROL_ENABLE(CONTROL_BTNSLIDESHOW_RECURSIVE);
-//  }
+  if (m_vecItems->Size() == 0 || nFolders == 0 ||
+      m_vecItems->GetPath() == "addons://sources/image/")
+  {
+    CONTROL_DISABLE(CONTROL_BTNSLIDESHOW_RECURSIVE);
+  }
+  else
+  {
+    CONTROL_ENABLE(CONTROL_BTNSLIDESHOW_RECURSIVE);
+  }
 }
 
 void CGUIWindowPictures::OnPrepareFileItems(CFileItemList& items)
@@ -591,9 +591,9 @@ void CGUIWindowPictures::OnItemInfo(int itemNumber)
 
 std::string CGUIWindowPictures::GetStartFolder(const std::string &dir)
 {
-//  if (StringUtils::EqualsNoCase(dir, "plugins") ||
-//      StringUtils::EqualsNoCase(dir, "addons"))
-//    return "addons://sources/image/";
+  if (StringUtils::EqualsNoCase(dir, "plugins") ||
+      StringUtils::EqualsNoCase(dir, "addons"))
+    return "addons://sources/image/";
 
   SetupShares();
   VECSOURCES shares;
