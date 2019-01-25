@@ -27,20 +27,20 @@
 			<!-- view id = 512 -->
 			<include>AlbumInfoListView</include>
 			<!-- view id = 513 -->
-<!--			<include>AddonInfoListView1</include> -->
+			<include>AddonInfoListView1</include> -->
 			<!-- view id = 550 -->
-<!--			<include>AddonInfoThumbView1</include> -->
+			<include>AddonInfoThumbView1</include> -->
 			<!-- view id = 551 -->
 		</control>
 		<!--general window furniture-->
-<!--		<control type="group">
+		<control type="group">
 			<include>Clock</include>
 			<include>CommonPageCount</include>
 			<include>CommonNowPlaying</include>
 			<include>ScrollOffsetLabel</include>
 		</control>
--->		<!--breadcrumbs-->
-<!--			<include content="DynamicLeftBreadcrumb">
+		<!--breadcrumbs-->
+			<include content="DynamicLeftBreadcrumb">
 			<param name="breadcrumb1-label" value="$LOCALIZE[10516]" />
 			<param name="breadcrumb2-label" value="[LOWERCASE]$INFO[Container.FolderName][/LOWERCASE]" />
 			<param name="breadcrumb2-visible" value="!String.IsEmpty(Container.FolderName)" />
@@ -53,7 +53,7 @@
 			<param name="breadcrumb2-label" value="$INFO[Container.SortMethod]" />
 			<param name="breadcrumb2-visible" value="true" />
 		</include>
--->		<!--dialog fade-->
+		<!--dialog fade-->
 		<include>BehindDialogFadeOut</include>
 		<!--view options-->
 		<control type="group">
@@ -117,19 +117,19 @@
 						<visible>Control.IsVisible(509)</visible>
 					</control>
 					<!--background settings-->
-					<control type="button" id="30">
+<!--					<control type="button" id="30">
 						<label>$LOCALIZE[31102]</label>
 						<include>ButtonCommonValues</include>
 						<onclick>ActivateWindowAndFocus(SkinSettings,9000,2,301,0)</onclick>
 					</control>
-					<!--choose colour-->
-					<control type="button" id="33">
+-->					<!--choose colour-->
+<!--					<control type="button" id="33">
 						<label>$LOCALIZE[31919]</label>
 						<include>ButtonCommonValues</include>
 						<onclick>SetFocus(50)</onclick>
 						<onclick>ActivateWindow(1100)</onclick>
 					</control>
-					<!--search-->
+-->					<!--search-->
 					<control type="button" id="8">
 						<include>ButtonCommonValues</include>
 						<label>137</label>

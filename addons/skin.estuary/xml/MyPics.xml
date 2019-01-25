@@ -31,9 +31,9 @@
 			<!-- view id = 510 -->
 			<include>PictureThumbView</include>
 			<!-- view id = 514 -->
-<!-- 			<include>AddonInfoListView1</include> -->
+ 			<include>AddonInfoListView1</include> -->
 			<!-- view id = 550 -->
-<!-- 			<include>AddonInfoThumbView1</include> -->
+			<include>AddonInfoThumbView1</include> -->
 			<!-- view id = 551 -->
 		</control>
 		<!--general window furniture-->
@@ -42,7 +42,7 @@
 		<include>CommonNowPlaying</include>
 		<include>ScrollOffsetLabel</include>
 		<!--breadcrumbs-->
-<!-- 		<include content="DynamicLeftBreadcrumb">
+ 		<include content="DynamicLeftBreadcrumb">
 			<param name="breadcrumb1-label" value="$LOCALIZE[1]" />
 			<param name="breadcrumb2-label" value="[LOWERCASE]$INFO[Container.FolderName][/LOWERCASE]" />
 			<param name="breadcrumb2-visible" value="!String.IsEmpty(Container.FolderName)" />
@@ -56,7 +56,7 @@
 			<param name="breadcrumb2-visible" value="true" />
 		</include>
 		<include>BehindDialogFadeOut</include>
--->		<!--view options-->
+		<!--view options-->
 		<control type="group">
 			<left>-375</left>
 			<include>SideBladeLeft</include>
@@ -117,13 +117,13 @@
 						<onclick>Filter</onclick>
 					</control>
 					<!--choose colour-->
-					<control type="button" id="32">
+<!--					<control type="button" id="32">
 						<label>$LOCALIZE[31919]</label>
 						<include>ButtonCommonValues</include>
 						<onclick>SetFocus(50)</onclick>
 						<onclick>ActivateWindow(1100)</onclick>
 					</control>
-					<!--<control type="label" id="201">
+-->					<!--<control type="label" id="201">
 						<width>375</width>
 						<height>52</height>
 						<font>font12</font>

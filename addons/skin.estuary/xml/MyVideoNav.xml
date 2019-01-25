@@ -34,9 +34,9 @@
 				<!-- view id = 505 -->
 				<include>MusicVideoInfoListView</include>
 				<!-- view id = 511 -->
-<!--				<include>AddonInfoListView1</include> -->
+				<include>AddonInfoListView1</include> -->
 				<!-- view id = 550 -->
-<!--				<include>AddonInfoThumbView1</include> -->
+				<include>AddonInfoThumbView1</include> -->
 				<!-- view id = 551 -->
 			</control>
 			<!--general window furniture-->
@@ -47,7 +47,7 @@
 				<include>ScrollOffsetLabel</include>
 			</control>
 			<!--breadcrumbs-->
-<!--			<include content="DynamicLeftBreadcrumb">
+			<include content="DynamicLeftBreadcrumb">
 				<param name="breadcrumb1-label" value="$LOCALIZE[3]" />
 				<param name="breadcrumb2-label" value="[LOWERCASE]$INFO[Container.FolderName][/LOWERCASE]" />
 				<param name="breadcrumb2-visible" value="!String.IsEmpty(Container.FolderName)" />
@@ -60,7 +60,7 @@
 				<param name="breadcrumb2-label" value="$INFO[Container.SortMethod]" />
 				<param name="breadcrumb2-visible" value="true" />
 			</include>
--->			<!--dialog fade-->
+			<!--dialog fade-->
 			<include>BehindDialogFadeOut</include>
 			<!--view options-->
 			<control type="group">
@@ -130,13 +130,13 @@
 							<onclick>ActivateWindowAndFocus(SkinSettings,9000,2,301,0)</onclick>
 						</control>
 						<!--choose colour-->
-						<control type="button" id="32">
+<!--						<control type="button" id="32">
 							<label>$LOCALIZE[31919]</label>
 							<include>ButtonCommonValues</include>
 							<onclick>SetFocus(50)</onclick>
 							<onclick>ActivateWindow(1100)</onclick>
 						</control>
-						<!--watched toggle-->
+-->						<!--watched toggle-->
 						<control type="radiobutton" id="14">
 							<textwidth>255</textwidth>
 							<include>ButtonCommonValues</include>
